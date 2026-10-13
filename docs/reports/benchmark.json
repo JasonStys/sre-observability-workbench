@@ -1,16 +1,16 @@
 {
   "events": 10000,
-  "median_ms": 13.117,
+  "median_ms": 15.585,
   "os": "Windows",
   "peak_python_allocated_bytes": 655904,
   "python": "3.14.6",
   "repetitions": 5,
   "samples_ms": [
-    13.687,
-    13.117,
-    14.264,
-    12.973,
-    12.957
+    15.146,
+    15.0,
+    15.585,
+    18.631,
+    15.889
   ],
   "scope": "in-memory SLO analyzer only; timings are informational, no machine-dependent hard latency gate"
 }

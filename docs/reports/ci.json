@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "verified_at_utc": "2026-10-13T22:01:33Z",
+  "repository": "JasonStys/sre-observability-workbench",
+  "reviewed_executable_source_sha": "bb731ae7883e11f5c49020b3eddb105cb81f3067",
+  "scope": "Immutable completed executable-source verification; documentation-only follow-up receives the same checks and latest status is shown by README badges.",
+  "runs": [
+    {
+      "id": 38474394511,
+      "name": "Validate",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/sre-observability-workbench/actions/runs/38474394511",
+      "jobs": [
+        {"name":"Python 3.12 / ubuntu-latest","conclusion":"success"},
+        {"name":"Python 3.14 / ubuntu-latest","conclusion":"success"},
+        {"name":"Python 3.14 / windows-latest","conclusion":"success"},
+        {"name":"Python 3.14 / macos-15-intel","conclusion":"success"},
+        {"name":"observability","conclusion":"success"},
+        {"name":"security","conclusion":"success"}
+      ]
+    },
+    {
+      "id": 38474394454,
+      "name": "CodeQL",
+      "conclusion": "success",
+      "url": "https://github.com/JasonStys/sre-observability-workbench/actions/runs/38474394454",
+      "jobs": [
+        {"name":"CodeQL / python","conclusion":"success"},
+        {"name":"CodeQL / javascript-typescript","conclusion":"success"}
+      ]
+    }
+  ],
+  "local_python_tests": 39,
+  "typescript_tests": 4,
+  "windows_branch_inclusive_coverage_percent": 98.53,
+  "prometheus_rule_scenarios": 7,
+  "grafana_panels_provisioned": 7,
+  "grafana_datasource_query_requests": 40,
+  "open_code_scanning_alerts": 0,
+  "actions_artifact_bytes": 0,
+  "actions_cache_bytes": 0,
+  "local_docker_desktop_changed": false,
+  "independent_security_audit": false,
+  "production_deployment": false
+}

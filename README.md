@@ -85,6 +85,7 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [client/load.ts](client/load.ts) | Bounded loopback drill client, SDK spans and complete attempt evidence. Created by Jason Stys. |
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: a bounded native observability lab. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured in-memory analyzer timing and allocation evidence. |
+| [docs/reports/ci.json](docs/reports/ci.json) | Verified source SHA and final measured GitHub Actions check snapshot. |
 | [docs/reports/drill.html](docs/reports/drill.html) | Escaped network-inert rendering of the measured synthetic drill. |
 | [docs/reports/drill.json](docs/reports/drill.json) | Actual synthetic Windows fault/recovery measurement and correlated evidence counts. |
 | [docs/reports/stack.json](docs/reports/stack.json) | Actual Windows native Prometheus scrape/rule/missing-worker measurements. |

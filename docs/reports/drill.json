@@ -1,5 +1,5 @@
 {
-  "as_of_ms": 1791928386028,
+  "as_of_ms": 1791928786638,
   "availability": {
     "alert": "PAGE",
     "allowed_bad": 0.04,
@@ -20,8 +20,8 @@
     "client_spans": 40,
     "correlated_logs": 80,
     "failures": 4,
-    "first_failure_ms_from_first_completion": 31,
-    "first_recovered_completion_ms_from_first_completion": 96,
+    "first_failure_ms_from_first_completion": 7,
+    "first_recovered_completion_ms_from_first_completion": 53,
     "parent_chains_verified": 40,
     "service_spans": 120,
     "timing_scope": "client completions, not alert notification or production MTTR"
@@ -39,11 +39,11 @@
     "requests": 40,
     "slow_pair": "PAGE"
   },
-  "observed_span_ms": 311,
+  "observed_span_ms": 192,
   "percentiles": {
-    "p50_us": 2550,
-    "p95_us": 25626,
-    "p99_us": 27718
+    "p50_us": 2686,
+    "p95_us": 16247,
+    "p99_us": 21218
   },
   "policy": {
     "latency_us": 50000,
