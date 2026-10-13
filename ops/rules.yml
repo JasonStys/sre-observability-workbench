@@ -1,0 +1,56 @@
+# Gateway request SLOs: fixed 99.9% / 50ms with multiwindow burn alerts. Created by Jason Stys.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: groups — line 14
+# parameter: name — line 15
+# parameter: rules — line 16
+# parameter: record — line 17
+# parameter: expr — line 18
+# parameter: alert — line 33
+# parameter: labels — line 35
+# parameter: severity — line 36
+# parameter: annotations — line 37
+# parameter: summary — line 38
+# END CODE MAP
+groups:
+  - name: workbench-slos
+    rules:
+      - record: workbench:availability_bad:ratio5m
+        expr: sum(rate(workbench_requests_total{service="gateway",status_group=~"4xx|5xx"}[5m])) / sum(rate(workbench_requests_total{service="gateway"}[5m]))
+      - record: workbench:availability_bad:ratio1h
+        expr: sum(rate(workbench_requests_total{service="gateway",status_group=~"4xx|5xx"}[1h])) / sum(rate(workbench_requests_total{service="gateway"}[1h]))
+      - record: workbench:availability_bad:ratio30m
+        expr: sum(rate(workbench_requests_total{service="gateway",status_group=~"4xx|5xx"}[30m])) / sum(rate(workbench_requests_total{service="gateway"}[30m]))
+      - record: workbench:availability_bad:ratio6h
+        expr: sum(rate(workbench_requests_total{service="gateway",status_group=~"4xx|5xx"}[6h])) / sum(rate(workbench_requests_total{service="gateway"}[6h]))
+      - record: workbench:latency_bad:ratio5m
+        expr: 1 - sum(rate(workbench_request_duration_seconds_bucket{service="gateway",status_group="2xx",le="0.05"}[5m])) / sum(rate(workbench_request_duration_seconds_count{service="gateway"}[5m]))
+      - record: workbench:latency_bad:ratio1h
+        expr: 1 - sum(rate(workbench_request_duration_seconds_bucket{service="gateway",status_group="2xx",le="0.05"}[1h])) / sum(rate(workbench_request_duration_seconds_count{service="gateway"}[1h]))
+      - record: workbench:latency_bad:ratio30m
+        expr: 1 - sum(rate(workbench_request_duration_seconds_bucket{service="gateway",status_group="2xx",le="0.05"}[30m])) / sum(rate(workbench_request_duration_seconds_count{service="gateway"}[30m]))
+      - record: workbench:latency_bad:ratio6h
+        expr: 1 - sum(rate(workbench_request_duration_seconds_bucket{service="gateway",status_group="2xx",le="0.05"}[6h])) / sum(rate(workbench_request_duration_seconds_count{service="gateway"}[6h]))
+      - alert: AvailabilityBudgetBurn
+        expr: (((workbench:availability_bad:ratio1h > 0.0144) and (workbench:availability_bad:ratio5m > 0.0144)) or ((workbench:availability_bad:ratio6h > 0.006) and (workbench:availability_bad:ratio30m > 0.006))) and (sum(increase(workbench_requests_total{service="gateway"}[5m])) >= 20)
+        labels:
+          severity: page
+        annotations:
+          summary: Synthetic gateway availability budget burning
+      - alert: LatencyBudgetBurn
+        expr: (((workbench:latency_bad:ratio1h > 0.0144) and (workbench:latency_bad:ratio5m > 0.0144)) or ((workbench:latency_bad:ratio6h > 0.006) and (workbench:latency_bad:ratio30m > 0.006))) and (sum(increase(workbench_requests_total{service="gateway"}[5m])) >= 20)
+        labels:
+          severity: page
+        annotations:
+          summary: Synthetic gateway latency budget burning
+      - alert: TelemetryMissing
+        expr: (count(up{job="workbench"} == 0) > 0) or absent(up{job="workbench"})
+        labels:
+          severity: warning
+        annotations:
+          summary: Synthetic service scrape missing or unavailable
+      - alert: SLOInsufficientData
+        expr: (sum(increase(workbench_requests_total{service="gateway"}[5m])) < 20) or absent(workbench_requests_total{service="gateway"})
+        labels:
+          severity: info
+        annotations:
+          summary: Request volume missing or below the lab SLO floor

@@ -1,0 +1,21 @@
+# Versioned read-only dashboard provisioning. Created by Jason Stys.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: apiVersion — line 13
+# parameter: providers — line 14
+# parameter: name — line 15
+# parameter: orgId — line 16
+# parameter: type — line 17
+# parameter: disableDeletion — line 18
+# parameter: allowUiUpdates — line 19
+# parameter: options — line 20
+# parameter: path — line 21
+# END CODE MAP
+apiVersion: 1
+providers:
+  - name: workbench
+    orgId: 1
+    type: file
+    disableDeletion: true
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards

@@ -1,0 +1,55 @@
+# Jason Stys: read-only source analysis, scoped security event uploads; not Actions artifacts.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: name — line 24
+# parameter: on — line 25
+# parameter: push — line 26
+# parameter: branches — line 27
+# parameter: pull_request — line 28
+# parameter: workflow_dispatch — line 29
+# parameter: permissions — line 30
+# parameter: contents — line 31
+# parameter: jobs — line 32
+# parameter: analyze — line 33
+# expression: matrix.language — line 34
+# parameter: actions — line 40
+# parameter: strategy — line 41
+# parameter: matrix — line 43
+# parameter: language — line 44
+# parameter: steps — line 45
+# parameter: uses — line 46
+# parameter: with — line 47
+# parameter: languages — line 51
+# parameter: queries — line 52
+# END CODE MAP
+name: CodeQL
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  analyze:
+    name: CodeQL / ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [python, javascript-typescript]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+      - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4
+        with:
+          upload-database: false

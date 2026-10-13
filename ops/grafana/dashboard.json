@@ -1,0 +1,20 @@
+{
+  "uid": "sre-workbench",
+  "title": "SRE Observability Workbench — Jason Stys",
+  "tags": ["sre", "synthetic", "portfolio"],
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": false,
+  "timezone": "utc",
+  "refresh": "5s",
+  "time": {"from": "now-1h", "to": "now"},
+  "panels": [
+    {"id":1,"type":"text","title":"Scope and author","gridPos":{"x":0,"y":0,"w":24,"h":3},"options":{"mode":"markdown","content":"Created by [Jason Stys](https://github.com/JasonStys). [Contact](https://www.linkedin.com/in/jason-stys-31b30b351/). Synthetic local traffic only. Missing telemetry and low volume are not health. Traces/logs are local JSONL; use docs/runbook.md for correlation and response."}},
+    {"id":2,"type":"timeseries","title":"Gateway requests / second","gridPos":{"x":0,"y":3,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"workbench-prometheus"},"targets":[{"refId":"A","expr":"sum(rate(workbench_requests_total{service=\"gateway\"}[1m]))"}],"fieldConfig":{"defaults":{"unit":"reqps"},"overrides":[]}},
+    {"id":3,"type":"timeseries","title":"Availability burn (5m / 1h)","gridPos":{"x":12,"y":3,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"workbench-prometheus"},"targets":[{"refId":"A","expr":"workbench:availability_bad:ratio5m / 0.001","legendFormat":"5m"},{"refId":"B","expr":"workbench:availability_bad:ratio1h / 0.001","legendFormat":"1h"}],"fieldConfig":{"defaults":{"min":0},"overrides":[]}},
+    {"id":4,"type":"timeseries","title":"Gateway p95 latency (histogram estimate)","gridPos":{"x":0,"y":11,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"workbench-prometheus"},"targets":[{"refId":"A","expr":"histogram_quantile(0.95, sum by (le) (rate(workbench_request_duration_seconds_bucket{service=\"gateway\"}[5m])))"}],"fieldConfig":{"defaults":{"unit":"s"},"overrides":[]}},
+    {"id":5,"type":"timeseries","title":"Latency burn (5m / 1h)","gridPos":{"x":12,"y":11,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"workbench-prometheus"},"targets":[{"refId":"A","expr":"workbench:latency_bad:ratio5m / 0.001","legendFormat":"5m"},{"refId":"B","expr":"workbench:latency_bad:ratio1h / 0.001","legendFormat":"1h"}],"fieldConfig":{"defaults":{"min":0},"overrides":[]}},
+    {"id":6,"type":"timeseries","title":"Scrape availability (not request SLI)","gridPos":{"x":0,"y":19,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"workbench-prometheus"},"targets":[{"refId":"A","expr":"up{job=\"workbench\"}","legendFormat":"{{instance}}"}],"fieldConfig":{"defaults":{"min":0,"max":1},"overrides":[]}},
+    {"id":7,"type":"table","title":"Firing / pending alerts (empty is not proof of health)","gridPos":{"x":12,"y":19,"w":12,"h":8},"datasource":{"type":"prometheus","uid":"workbench-prometheus"},"targets":[{"refId":"A","expr":"ALERTS","format":"table","instant":true}]}
+  ]
+}

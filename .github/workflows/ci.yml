@@ -1,0 +1,134 @@
+# Jason Stys: native cross-platform evidence, actual Prometheus/Grafana and storage-free security checks.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: name — line 31
+# parameter: on — line 32
+# parameter: push — line 33
+# parameter: branches — line 34
+# parameter: pull_request — line 35
+# parameter: workflow_dispatch — line 36
+# parameter: permissions — line 37
+# parameter: contents — line 38
+# parameter: concurrency — line 39
+# parameter: group — line 40
+# expression: github.ref — line 40
+# parameter: jobs — line 42
+# parameter: quality — line 43
+# expression: matrix.python — line 44
+# expression: matrix.os — line 44
+# parameter: strategy — line 47
+# parameter: matrix — line 49
+# parameter: include — line 50
+# parameter: steps — line 55
+# parameter: uses — line 56
+# parameter: with — line 57
+# parameter: run — line 65
+# parameter: shell — line 68
+# parameter: if — line 71
+# variable: GITHUB_STEP_SUMMARY — line 73
+# parameter: observability — line 74
+# parameter: security — line 101
+# END CODE MAP
+name: Validate
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  quality:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: ubuntu-latest, python: '3.12'}
+          - {os: ubuntu-latest, python: '3.14'}
+          - {os: windows-latest, python: '3.14'}
+          - {os: macos-15-intel, python: '3.14'}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci --ignore-scripts
+      - name: Strict quality and real local integration
+        shell: bash
+        run: bash scripts/validate.sh
+      - name: Results in logs only
+        if: always()
+        shell: bash
+        run: printf '%s\n' 'Test/coverage/benchmark evidence is in this job log. No artifact or cache uploads. All traffic synthetic and loopback-only.' >> "$GITHUB_STEP_SUMMARY"
+  observability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci --ignore-scripts && npm run build
+      - name: Verified native tools
+        run: |
+          python scripts/bootstrap.py promtool
+          python scripts/bootstrap.py prometheus
+      - name: Native config and seven alert regression scenarios
+        run: |
+          .tools/promtool check config ops/prometheus.yml
+          .tools/promtool test rules ops/rules.test.yml
+      - name: Actual scrapes, rules, authenticated dashboard and missing-worker detection
+        run: python scripts/observability.py --grafana
+      - name: Observability summary
+        run: printf '%s\n' 'Actual synthetic scrape/error counts, seven provisioned Grafana panels, authenticated datasource query and missing-worker alert validated. Disposable Linux runner only; no local Docker changes or artifact/cache uploads.' >> "$GITHUB_STEP_SUMMARY"
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: python -m pip install --require-hashes -r requirements-dev.lock
+      - run: npm ci --ignore-scripts
+      - name: Complete dependency advisory audits
+        run: |
+          python -m pip_audit -r requirements-dev.lock --disable-pip --no-deps
+          python -m pip_audit -r requirements.lock --disable-pip --no-deps
+          npm audit --audit-level=high
+      - name: Checksum verified official scanners
+        run: |
+          python scripts/bootstrap.py gitleaks
+          python scripts/bootstrap.py trivy
+          python scripts/bootstrap.py actionlint
+      - name: History secrets, dependencies and workflow/shell gates
+        run: |
+          .tools/gitleaks git . --redact --no-banner
+          .tools/trivy fs --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --skip-dirs .git,.tools,.venv,.locks,out,node_modules .
+          .tools/actionlint
+          shellcheck scripts/validate.sh
+      - name: Security summary
+        run: printf '%s\n' 'Dependency graph audits, history secret scan, HIGH/CRITICAL dependency gate, actionlint and ShellCheck passed. No vulnerability suppressions, account data, artifact/cache uploads or production access.' >> "$GITHUB_STEP_SUMMARY"

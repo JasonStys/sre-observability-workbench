@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "reviewed": "2026-10-13",
+  "tools": {
+    "prometheus-linux": {"version":"3.15.0","url":"https://github.com/prometheus/prometheus/releases/download/v3.15.0/prometheus-3.15.0.linux-amd64.tar.gz","sha256":"2a542df32eac02ee17b9d844fb2aa1de00dafa5476579ba8a3ba862e9d572ea0"},
+    "prometheus-windows": {"version":"3.15.0","url":"https://github.com/prometheus/prometheus/releases/download/v3.15.0/prometheus-3.15.0.windows-amd64.tar.gz","sha256":"c9587293dc06aea91a72ae5167bc66f12c5f51e87c06802e1b0c7bf69b26dee9"},
+    "gitleaks": {"version":"8.30.1","url":"https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz","sha256":"551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"},
+    "trivy": {"version":"0.75.0","url":"https://github.com/aquasecurity/trivy/releases/download/v0.75.0/trivy_0.75.0_Linux-64bit.tar.gz","sha256":"c6e65abddb348e25f10549df887045629cf28cc72453cd1c63acb717316b3f3f"},
+    "actionlint": {"version":"1.7.12","url":"https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz","sha256":"8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"}
+  },
+  "images": {
+    "grafana": "grafana/grafana:13.2.4@sha256:dbbc38ea21103cefb50396340cd88afec779c7e070b0a7bf5a75b4ce46651d3f"
+  }
+}

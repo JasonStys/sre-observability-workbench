@@ -1,0 +1,20 @@
+# Loopback-only native service scraping; no remote write or credentials. Created by Jason Stys.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: global — line 12
+# parameter: scrape_interval — line 13
+# parameter: evaluation_interval — line 14
+# parameter: rule_files — line 15
+# parameter: scrape_configs — line 17
+# parameter: job_name — line 18
+# parameter: static_configs — line 19
+# parameter: targets — line 20
+# END CODE MAP
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+rule_files:
+  - rules.yml
+scrape_configs:
+  - job_name: workbench
+    static_configs:
+      - targets: ['127.0.0.1:8000', '127.0.0.1:8001']

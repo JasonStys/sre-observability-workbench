@@ -1,0 +1,17 @@
+.venv/
+.locks/
+.tools/
+node_modules/
+dist/
+out/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+__pycache__/
+*.pyc
+.coverage*
+coverage.xml
+.env*
+*.db
+*.log

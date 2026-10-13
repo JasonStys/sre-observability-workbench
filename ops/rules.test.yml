@@ -1,0 +1,111 @@
+# Native PromQL fixtures: healthy, failing, slow, reset, missing, low traffic. Created by Jason Stys.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: rule_files — line 19
+# parameter: evaluation_interval — line 20
+# parameter: tests — line 21
+# parameter: name — line 22
+# parameter: interval — line 23
+# parameter: input_series — line 24
+# parameter: alert_rule_test — line 30
+# parameter: promql_expr_test — line 35
+# parameter: expr — line 36
+# parameter: eval_time — line 37
+# parameter: exp_samples — line 38
+# parameter: alertname — line 46
+# parameter: exp_alerts — line 47
+# parameter: exp_labels — line 48
+# parameter: exp_annotations — line 49
+# END CODE MAP
+rule_files: [rules.yml]
+evaluation_interval: 1m
+tests:
+  - name: healthy
+    interval: 1m
+    input_series:
+      - {series: 'up{job="workbench"}', values: '1x400'}
+      - {series: 'workbench_requests_total{service="gateway",status_group="2xx"}', values: '0+100x400'}
+      - {series: 'workbench_requests_total{service="gateway",status_group="5xx"}', values: '0x400'}
+      - {series: 'workbench_request_duration_seconds_count{service="gateway",status_group="2xx"}', values: '0+100x400'}
+      - {series: 'workbench_request_duration_seconds_bucket{service="gateway",status_group="2xx",le="0.05"}', values: '0+100x400'}
+    alert_rule_test:
+      - {eval_time: 6h, alertname: AvailabilityBudgetBurn, exp_alerts: []}
+      - {eval_time: 6h, alertname: LatencyBudgetBurn, exp_alerts: []}
+      - {eval_time: 6h, alertname: TelemetryMissing, exp_alerts: []}
+      - {eval_time: 6h, alertname: SLOInsufficientData, exp_alerts: []}
+    promql_expr_test:
+      - expr: workbench:availability_bad:ratio5m
+        eval_time: 6h
+        exp_samples: [{labels: '{__name__="workbench:availability_bad:ratio5m"}', value: 0}]
+  - name: error-burst
+    interval: 1m
+    input_series:
+      - {series: 'workbench_requests_total{service="gateway",status_group="2xx"}', values: '0+98x400'}
+      - {series: 'workbench_requests_total{service="gateway",status_group="5xx"}', values: '0+2x400'}
+    alert_rule_test:
+      - eval_time: 6h
+        alertname: AvailabilityBudgetBurn
+        exp_alerts:
+          - exp_labels: {severity: page}
+            exp_annotations: {summary: Synthetic gateway availability budget burning}
+  - name: latency-only
+    interval: 1m
+    input_series:
+      - {series: 'workbench_requests_total{service="gateway",status_group="2xx"}', values: '0+100x400'}
+      - {series: 'workbench_requests_total{service="gateway",status_group="5xx"}', values: '0x400'}
+      - {series: 'workbench_request_duration_seconds_count{service="gateway",status_group="2xx"}', values: '0+100x400'}
+      - {series: 'workbench_request_duration_seconds_bucket{service="gateway",status_group="2xx",le="0.05"}', values: '0+98x400'}
+    alert_rule_test:
+      - {eval_time: 6h, alertname: AvailabilityBudgetBurn, exp_alerts: []}
+      - eval_time: 6h
+        alertname: LatencyBudgetBurn
+        exp_alerts:
+          - exp_labels: {severity: page}
+            exp_annotations: {summary: Synthetic gateway latency budget burning}
+  - name: counter-reset
+    interval: 1m
+    input_series:
+      - {series: 'workbench_requests_total{service="gateway",status_group="2xx"}', values: '0+100x60 0+100x339'}
+      - {series: 'workbench_requests_total{service="gateway",status_group="5xx"}', values: '0x400'}
+    alert_rule_test:
+      - {eval_time: 65m, alertname: AvailabilityBudgetBurn, exp_alerts: []}
+    promql_expr_test:
+      - expr: workbench:availability_bad:ratio5m
+        eval_time: 65m
+        exp_samples: [{labels: '{__name__="workbench:availability_bad:ratio5m"}', value: 0}]
+  - name: missing-data
+    input_series: []
+    alert_rule_test:
+      - {eval_time: 6h, alertname: AvailabilityBudgetBurn, exp_alerts: []}
+      - eval_time: 6h
+        alertname: TelemetryMissing
+        exp_alerts:
+          - exp_labels: {severity: warning, job: workbench}
+            exp_annotations: {summary: Synthetic service scrape missing or unavailable}
+      - eval_time: 6h
+        alertname: SLOInsufficientData
+        exp_alerts:
+          - exp_labels: {severity: info, service: gateway}
+            exp_annotations: {summary: Request volume missing or below the lab SLO floor}
+  - name: low-traffic
+    interval: 1m
+    input_series:
+      - {series: 'workbench_requests_total{service="gateway",status_group="2xx"}', values: '0x400'}
+      - {series: 'workbench_requests_total{service="gateway",status_group="5xx"}', values: '0+1x400'}
+    alert_rule_test:
+      - {eval_time: 6h, alertname: AvailabilityBudgetBurn, exp_alerts: []}
+      - eval_time: 6h
+        alertname: SLOInsufficientData
+        exp_alerts:
+          - exp_labels: {severity: info}
+            exp_annotations: {summary: Request volume missing or below the lab SLO floor}
+  - name: partial-scrape-loss
+    interval: 1m
+    input_series:
+      - {series: 'up{job="workbench",instance="worker"}', values: '0x20'}
+      - {series: 'up{job="workbench",instance="gateway"}', values: '1x20'}
+    alert_rule_test:
+      - eval_time: 5m
+        alertname: TelemetryMissing
+        exp_alerts:
+          - exp_labels: {severity: warning}
+            exp_annotations: {summary: Synthetic service scrape missing or unavailable}

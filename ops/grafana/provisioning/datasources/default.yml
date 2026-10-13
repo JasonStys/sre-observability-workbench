@@ -1,0 +1,21 @@
+# Local native Prometheus datasource; no external SaaS or stored credentials. Created by Jason Stys.
+# BEGIN CODE MAP (generated; python scripts/code_map.py)
+# parameter: apiVersion — line 13
+# parameter: datasources — line 14
+# parameter: name — line 15
+# parameter: uid — line 16
+# parameter: type — line 17
+# parameter: access — line 18
+# parameter: url — line 19
+# parameter: isDefault — line 20
+# parameter: editable — line 21
+# END CODE MAP
+apiVersion: 1
+datasources:
+  - name: Local Prometheus
+    uid: workbench-prometheus
+    type: prometheus
+    access: proxy
+    url: http://127.0.0.1:9090
+    isDefault: true
+    editable: false

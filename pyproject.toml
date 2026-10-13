@@ -1,0 +1,30 @@
+[project]
+name = "sre-observability-workbench"
+version = "1.0.0"
+description = "Bounded local observability drills and evidence-aware SLO analysis by Jason Stys"
+requires-python = ">=3.12"
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["sre"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+branch = true
+source = ["sre"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90

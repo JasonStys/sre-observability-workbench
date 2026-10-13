@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; form-action 'none'"><title>SRE evidence — Jason Stys</title><body><h1>SRE Observability Workbench</h1><p>Created by Jason Stys · github.com/JasonStys · LinkedIn: jason-stys-31b30b351</p><p>Synthetic local drill evidence; not a production availability claim. COMPLETE_ASSERTED relies on the supplied expected count, not cryptographic provenance.</p><h2>Measured assessment</h2><pre>{
+  &quot;as_of_ms&quot;: 1791928386028,
+  &quot;availability&quot;: {
+    &quot;alert&quot;: &quot;PAGE&quot;,
+    &quot;allowed_bad&quot;: 0.04,
+    &quot;bad&quot;: 4,
+    &quot;budget_remaining&quot;: -3.96,
+    &quot;burn_rate&quot;: 100.0,
+    &quot;fast_pair&quot;: &quot;PAGE&quot;,
+    &quot;good_ratio&quot;: 0.9,
+    &quot;requests&quot;: 40,
+    &quot;slow_pair&quot;: &quot;PAGE&quot;
+  },
+  &quot;drill&quot;: {
+    &quot;attempts&quot;: 40,
+    &quot;client_result&quot;: {
+      &quot;attempts&quot;: 40,
+      &quot;failures&quot;: 4
+    },
+    &quot;client_spans&quot;: 40,
+    &quot;correlated_logs&quot;: 80,
+    &quot;failures&quot;: 4,
+    &quot;first_failure_ms_from_first_completion&quot;: 31,
+    &quot;first_recovered_completion_ms_from_first_completion&quot;: 96,
+    &quot;parent_chains_verified&quot;: 40,
+    &quot;service_spans&quot;: 120,
+    &quot;timing_scope&quot;: &quot;client completions, not alert notification or production MTTR&quot;
+  },
+  &quot;expected_events&quot;: 40,
+  &quot;future_events&quot;: 0,
+  &quot;latency&quot;: {
+    &quot;alert&quot;: &quot;PAGE&quot;,
+    &quot;allowed_bad&quot;: 0.04,
+    &quot;bad&quot;: 4,
+    &quot;budget_remaining&quot;: -3.96,
+    &quot;burn_rate&quot;: 100.0,
+    &quot;fast_pair&quot;: &quot;PAGE&quot;,
+    &quot;good_ratio&quot;: 0.9,
+    &quot;requests&quot;: 40,
+    &quot;slow_pair&quot;: &quot;PAGE&quot;
+  },
+  &quot;observed_span_ms&quot;: 311,
+  &quot;percentiles&quot;: {
+    &quot;p50_us&quot;: 2550,
+    &quot;p95_us&quot;: 25626,
+    &quot;p99_us&quot;: 27718
+  },
+  &quot;policy&quot;: {
+    &quot;latency_us&quot;: 50000,
+    &quot;min_requests&quot;: 20,
+    &quot;target_ppm&quot;: 999000,
+    &quot;window_ms&quot;: 2592000000
+  },
+  &quot;quality&quot;: &quot;COMPLETE_ASSERTED&quot;,
+  &quot;schema&quot;: 1,
+  &quot;synthetic&quot;: true
+}</pre><p>Help: README and docs/runbook.md in the repository.</p></body></html>

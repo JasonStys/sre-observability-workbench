@@ -1,0 +1,9 @@
+{
+  "healthy_scrape_targets": 2,
+  "missing_worker_alert_fired": true,
+  "observed_gateway_failures": 4.0,
+  "observed_gateway_requests": 40.0,
+  "prometheus_version": "3.15.0",
+  "recording_rules_executed": true,
+  "synthetic": true
+}
