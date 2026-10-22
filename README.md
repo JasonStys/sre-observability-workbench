@@ -88,6 +88,7 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [docs/reports/ci.json](docs/reports/ci.json) | Verified source SHA and final measured GitHub Actions check snapshot. |
 | [docs/reports/drill.html](docs/reports/drill.html) | Escaped network-inert rendering of the measured synthetic drill. |
 | [docs/reports/drill.json](docs/reports/drill.json) | Actual synthetic Windows fault/recovery measurement and correlated evidence counts. |
+| [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
 | [docs/reports/stack.json](docs/reports/stack.json) | Actual Windows native Prometheus scrape/rule/missing-worker measurements. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Measured validation and review record. |
 | [docs/research.md](docs/research.md) | Primary sources and implementation rationale. |
