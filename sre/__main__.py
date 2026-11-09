@@ -1,14 +1,16 @@
 """Local-only service and evidence-assessment command line. Created by Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: main — line 26
-# variable: parser — line 28
-# variable: subcommands — line 31
-# variable: serve — line 32
-# variable: analyze — line 39
-# variable: arguments — line 46
-# variable: lab — line 56
-# variable: events — line 72
-# variable: result — line 73
+# definition: main — line 29
+# variable: parser — line 31
+# variable: subcommands — line 34
+# variable: serve — line 35
+# variable: analyze — line 42
+# variable: journeys — line 49
+# variable: arguments — line 54
+# variable: lab — line 64
+# variable: comparison — line 80
+# variable: events — line 91
+# variable: result — line 92
 # END CODE MAP
 
 from __future__ import annotations
@@ -18,6 +20,7 @@ import json
 import threading
 from pathlib import Path
 
+from sre import bundle
 from sre.report import publish
 from sre.service import Faults, Lab
 from sre.slo import Policy, assess, load_events
@@ -43,6 +46,11 @@ def main() -> int:
     analyze.add_argument("--expected-events", type=int)
     analyze.add_argument("--target-ppm", type=int, default=999_000)
     analyze.add_argument("--latency-us", type=int, default=50_000)
+    journeys = subcommands.add_parser(
+        "bundle", help="Compare independent service/journey objectives"
+    )
+    journeys.add_argument("manifest", type=Path)
+    journeys.add_argument("--output", type=Path, required=True)
     arguments = parser.parse_args()
     try:
         if arguments.command == "serve":
@@ -68,6 +76,17 @@ def main() -> int:
                     threading.Event().wait()
                 except KeyboardInterrupt:
                     pass
+        elif arguments.command == "bundle":
+            comparison = bundle.analyze(arguments.manifest)
+            bundle.publish(comparison, arguments.output)
+            print(
+                json.dumps(
+                    {
+                        "streams": comparison["stream_count"],
+                        "review_items": len(comparison["review_queue"]),
+                    }
+                )
+            )
         else:
             events = load_events(arguments.events)
             result = assess(

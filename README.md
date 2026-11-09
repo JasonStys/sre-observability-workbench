@@ -9,6 +9,7 @@ A runnable, synthetic reliability lab: drive actual HTTP requests through two se
 
 - **Distributed observability:** TypeScript client → Python gateway → Python worker, real OpenTelemetry SDK spans with verified parent chains, bounded metric labels, and privacy-allowlisted logs.
 - **SLO reasoning:** independent availability and successful-request latency objectives; exact rational burn calculations, multiwindow alerts, negative remaining budgets, explicit missing/low-volume states, and raw nearest-rank percentiles.
+- **[Journey objective review](docs/journeys.md):** owner-routed service/journey bundles compare baseline and candidate thresholds on identical evidence. Incomplete streams stay visible; loosened objectives are flagged instead of being presented as reliability improvements.
 - **Incident drills:** a finite worker error schedule followed by automatic recovery; real request failures/timeouts are retained rather than removed from the denominator.
 - **Operations:** native Prometheus config/rule tests and real scrape-loss alert detection; seven version-controlled Grafana panels, tested with authentication and a working datasource on a disposable Linux CI runner.
 - **Evidence:** inert HTML/JSON reports and indexed, parameterized SQLite storage. Measured drill, benchmark, review and CI results live in [docs/reports](docs/reports).
@@ -84,10 +85,12 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [client/client.test.ts](client/client.test.ts) | Negative-boundary and real HTTP client tests. Created by Jason Stys. |
 | [client/load.ts](client/load.ts) | Bounded loopback drill client, SDK spans and complete attempt evidence. Created by Jason Stys. |
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: a bounded native observability lab. |
+| [docs/journeys.md](docs/journeys.md) | Service and journey objective review. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured in-memory analyzer timing and allocation evidence. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Verified source SHA and final measured GitHub Actions check snapshot. |
 | [docs/reports/drill.html](docs/reports/drill.html) | Escaped network-inert rendering of the measured synthetic drill. |
 | [docs/reports/drill.json](docs/reports/drill.json) | Actual synthetic Windows fault/recovery measurement and correlated evidence counts. |
+| [docs/reports/journeys-2026-11-09.md](docs/reports/journeys-2026-11-09.md) | Journey objective workflow validation — 2026-11-09. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
 | [docs/reports/stack.json](docs/reports/stack.json) | Actual Windows native Prometheus scrape/rule/missing-worker measurements. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Measured validation and review record. |
@@ -114,16 +117,19 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [scripts/code\_map.py](scripts/code_map.py) | Generate/check exact Python, SQL, shell and YAML symbol positions. Created by Jason Stys. |
 | [scripts/drill.py](scripts/drill.py) | Run real Python/TypeScript traffic and verify metric/log/span correlation. Created by Jason Stys. |
 | [scripts/file\_guide.py](scripts/file_guide.py) | Maintain exhaustive tracked-file README summaries without reading ignored drill outputs. Jason Stys. |
+| [scripts/journey\_demo.py](scripts/journey_demo.py) | Create a finite fictional retail checkout/warehouse journey bundle. Created by Jason Stys. |
 | [scripts/observability.py](scripts/observability.py) | Validate real Prometheus scraping and an optional disposable CI-only Grafana dashboard. Jason Stys. |
 | [scripts/ts\_map.mjs](scripts/ts_map.mjs) | Generate/check exact TypeScript and JavaScript AST symbol headers. Created by Jason Stys. |
 | [scripts/validate.sh](scripts/validate.sh) | Cross-platform quality, real integration and metadata gates. Created by Jason Stys. |
 | [scripts/validate\_repo.py](scripts/validate_repo.py) | Fail on unsafe telemetry/configuration metadata or undocumented dashboard drift. Created by Jason Stys. |
 | [sre/\_\_init\_\_.py](sre/__init__.py) | Local synthetic SRE workbench. Created by Jason Stys; https://github.com/JasonStys. |
 | [sre/\_\_main\_\_.py](sre/__main__.py) | Local-only service and evidence-assessment command line. Created by Jason Stys. |
+| [sre/bundle.py](sre/bundle.py) | Independent service/journey objectives and same-evidence policy review. Created by Jason Stys. |
 | [sre/report.py](sre/report.py) | Publish inert escaped HTML, JSON and parameterized SQLite evidence. Created by Jason Stys. |
 | [sre/service.py](sre/service.py) | Two loopback-only instrumented services with controlled startup faults. Created by Jason Stys. |
 | [sre/slo.py](sre/slo.py) | Validate client evidence and calculate exact request-based SLOs. Created by Jason Stys. |
 | [sre/telemetry.py](sre/telemetry.py) | Allowlisted local OpenTelemetry spans, correlated logs and bounded Prometheus labels. Jason Stys. |
+| [tests/test\_bundle.py](tests/test_bundle.py) | Independent service/journey comparison and operator workflow checks. Created by Jason Stys. |
 | [tests/test\_cli.py](tests/test_cli.py) | CLI parsing, shutdown and sanitized failure contract tests. Created by Jason Stys. |
 | [tests/test\_documentation.py](tests/test_documentation.py) | Exact source-map idempotence and function-line regression tests. Created by Jason Stys. |
 | [tests/test\_services.py](tests/test_services.py) | Real service, privacy, recovery, resource and cross-language integration tests. Created by Jason Stys. |
