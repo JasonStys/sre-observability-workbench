@@ -1,93 +1,95 @@
 """Validate client evidence and calculate exact request-based SLOs. Created by Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# variable: MAX_EVENTS — line 102
-# variable: MAX_BYTES — line 103
-# variable: FIELDS — line 104
-# definition: integer — line 107
-# parameter: maximum — line 107
-# parameter: minimum — line 107
-# parameter: value — line 107
-# definition: identifier — line 114
-# parameter: size — line 114
-# parameter: value — line 114
-# definition: Event — line 126
-# variable: id — line 129
-# variable: at_ms — line 130
-# variable: duration_us — line 131
-# variable: status — line 132
-# variable: trace_id — line 133
-# variable: span_id — line 134
-# definition: parse — line 137
-# parameter: cls — line 137
-# parameter: raw — line 137
-# variable: status — line 143
-# definition: Policy — line 157
-# variable: target_ppm — line 160
-# variable: latency_us — line 161
-# variable: window_ms — line 162
-# variable: min_requests — line 163
-# definition: __post_init__ — line 165
-# parameter: self — line 165
-# definition: unique_object — line 173
-# parameter: pairs — line 173
-# variable: result — line 175
-# variable: key — line 176
-# variable: value — line 176
-# definition: load_events — line 183
-# parameter: path — line 183
-# variable: events — line 185
-# variable: seen — line 186
+# variable: MAX_EVENTS — line 104
+# variable: MAX_BYTES — line 105
+# variable: FIELDS — line 106
+# definition: integer — line 109
+# parameter: maximum — line 109
+# parameter: minimum — line 109
+# parameter: value — line 109
+# definition: identifier — line 116
+# parameter: size — line 116
+# parameter: value — line 116
+# definition: Event — line 128
+# variable: id — line 131
+# variable: at_ms — line 132
+# variable: duration_us — line 133
+# variable: status — line 134
+# variable: trace_id — line 135
+# variable: span_id — line 136
+# definition: parse — line 139
+# parameter: cls — line 139
+# parameter: raw — line 139
+# variable: status — line 145
+# definition: Policy — line 159
+# variable: target_ppm — line 162
+# variable: latency_us — line 163
+# variable: window_ms — line 164
+# variable: min_requests — line 165
+# definition: __post_init__ — line 167
+# parameter: self — line 167
+# definition: unique_object — line 175
+# parameter: pairs — line 175
+# variable: result — line 177
+# variable: key — line 178
+# variable: value — line 178
+# definition: load_events — line 185
+# parameter: path — line 185
 # variable: stream — line 187
 # variable: content — line 188
-# variable: line — line 191
-# variable: event — line 194
-# definition: stats — line 202
-# parameter: events — line 202
-# parameter: latency — line 202
-# parameter: policy — line 202
-# variable: count — line 204
-# variable: bad — line 205
-# variable: event — line 210
-# variable: allowed — line 212
-# variable: burn — line 213
-# definition: pair_state — line 224
-# parameter: events — line 225
-# parameter: policy — line 226
-# parameter: as_of_ms — line 227
-# parameter: long_ms — line 228
-# parameter: short_ms — line 229
-# parameter: threshold — line 230
-# parameter: latency — line 231
-# variable: burns — line 234
-# variable: window — line 235
-# variable: selected — line 236
-# variable: event — line 237
-# variable: bad — line 241
-# variable: event — line 246
-# variable: burn — line 251
-# definition: assess — line 254
-# parameter: events — line 255
-# parameter: policy — line 256
-# parameter: as_of_ms — line 257
-# parameter: expected_events — line 258
-# variable: event — line 262
-# variable: selected — line 266
-# variable: event — line 268
-# variable: event — line 271
-# variable: future — line 271
-# variable: complete — line 272
-# variable: durations — line 275
+# definition: parse_events — line 192
+# parameter: content — line 192
+# variable: events — line 194
+# variable: seen — line 195
+# variable: line — line 198
+# variable: event — line 201
+# definition: stats — line 209
+# parameter: events — line 209
+# parameter: latency — line 209
+# parameter: policy — line 209
+# variable: count — line 211
+# variable: bad — line 212
+# variable: event — line 217
+# variable: allowed — line 219
+# variable: burn — line 220
+# definition: pair_state — line 231
+# parameter: events — line 232
+# parameter: policy — line 233
+# parameter: as_of_ms — line 234
+# parameter: long_ms — line 235
+# parameter: short_ms — line 236
+# parameter: threshold — line 237
+# parameter: latency — line 238
+# variable: burns — line 241
+# variable: window — line 242
+# variable: selected — line 243
+# variable: event — line 244
+# variable: bad — line 248
+# variable: event — line 253
+# variable: burn — line 258
+# definition: assess — line 261
+# parameter: events — line 262
+# parameter: policy — line 263
+# parameter: as_of_ms — line 264
+# parameter: expected_events — line 265
+# variable: event — line 269
+# variable: selected — line 273
 # variable: event — line 275
-# variable: percentiles — line 276
-# variable: percent — line 280
-# variable: result — line 282
-# variable: event — line 295
-# variable: event — line 296
-# variable: latency — line 299
-# variable: name — line 299
-# variable: fast — line 300
-# variable: slow — line 303
-# variable: alert — line 306
+# variable: event — line 278
+# variable: future — line 278
+# variable: complete — line 279
+# variable: durations — line 282
+# variable: event — line 282
+# variable: percentiles — line 283
+# variable: percent — line 287
+# variable: result — line 289
+# variable: event — line 302
+# variable: event — line 303
+# variable: latency — line 306
+# variable: name — line 306
+# variable: fast — line 307
+# variable: slow — line 310
+# variable: alert — line 313
 # END CODE MAP
 
 from __future__ import annotations
@@ -182,10 +184,15 @@ def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 def load_events(path: Path) -> list[Event]:
     """Read bounded UTF-8 JSONL, reject duplicate attempts and return events without executing content."""
-    events: list[Event] = []
-    seen: set[int] = set()
     with path.open("rb") as stream:
         content = stream.read(MAX_BYTES + 1)
+    return parse_events(content)
+
+
+def parse_events(content: bytes) -> list[Event]:
+    """Validate one bounded byte snapshot so reports can hash exactly the evidence they assess."""
+    events: list[Event] = []
+    seen: set[int] = set()
     if len(content) > MAX_BYTES:
         raise ValueError("evidence exceeds byte cap")
     for line in content.decode("utf-8").splitlines():
