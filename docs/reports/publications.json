@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "project": "sre-observability-workbench",
+  "author": "Jason Stys",
+  "editionDate": "2026-11-09",
+  "sourceBaseline": "8027d600ca0f1cb0575e8a23ff0147d3376046cb",
+  "sourceUrl": "https://github.com/JasonStys/sre-observability-workbench/tree/8027d600ca0f1cb0575e8a23ff0147d3376046cb",
+  "functionalEvidenceBaseline": "8027d600ca0f1cb0575e8a23ff0147d3376046cb",
+  "evidenceObservedAt": "2026-11-10T05:25:40.628667+00:00",
+  "workflowEvidence": [
+    {
+      "conclusion": "success",
+      "databaseId": 42698083697,
+      "event": "push",
+      "headSha": "8027d600ca0f1cb0575e8a23ff0147d3376046cb",
+      "name": "CodeQL",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/sre-observability-workbench/actions/runs/42698083697"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 42698083646,
+      "event": "push",
+      "headSha": "8027d600ca0f1cb0575e8a23ff0147d3376046cb",
+      "name": "Validate",
+      "status": "completed",
+      "url": "https://github.com/JasonStys/sre-observability-workbench/actions/runs/42698083646"
+    }
+  ],
+  "summary": "Compare owner/service/journey SLO bundles over identical windows, with quality, burn and weakened-objective review queues.",
+  "rationale": "Prevents pooled availability and changed denominators from hiding a failing user journey.",
+  "limitations": [
+    "Synthetic local streams; completeness, ownership and disjointness declarations remain operator assertions.",
+    "Matched-window review does not pool unlike journeys or automatically approve weakened objectives.",
+    "No automatic PromQL/dashboard rewriting or production SLO-policy enforcement is supplied."
+  ],
+  "documents": [
+    {
+      "filename": "project-guide.docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "bytes": 44686,
+      "sha256": "b63077903a07ba0ff4767c873e16ed3e711e8dfd00e4f49faa75516398035332",
+      "sourceBaseline": "8027d600ca0f1cb0575e8a23ff0147d3376046cb",
+      "visualReview": {
+        "approved": true,
+        "method": "Every rendered page individually viewed at readable original resolution",
+        "pageCount": 5,
+        "renderedPageSha256": {
+          "page-1.png": "358d93445156805210dfaeb48e888dc1a8de470b73505ac2e06e6a8d08d12277",
+          "page-2.png": "9b6bc416c39438f37cea359ba64fb2d4f7252961dcebc00e2f8bdf4ca1ebb78f",
+          "page-3.png": "1bd1ac25e953861c190fe1725993273574747903dd552d0e3d9dcc65edb43bbf",
+          "page-4.png": "d2f8f889da9b3ba946804fd5d93f66fb318cd920efc15dfb5db1ce21c5184f21",
+          "page-5.png": "a8af80a25938aee04783ceac08b57d1505183809f6e2e10ed6703104182abb7b"
+        }
+      }
+    }
+  ],
+  "scope": "Reviewed documentation editions of the cited source. Checksums identify bytes, not authorship. Historical measurements retain their own dates; integration CI must be checked separately."
+}

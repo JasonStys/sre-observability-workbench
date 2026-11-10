@@ -85,13 +85,17 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [client/client.test.ts](client/client.test.ts) | Negative-boundary and real HTTP client tests. Created by Jason Stys. |
 | [client/load.ts](client/load.ts) | Bounded loopback drill client, SDK spans and complete attempt evidence. Created by Jason Stys. |
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: a bounded native observability lab. |
+| [docs/handbook.md](docs/handbook.md) | SRE Observability Workbench handbook. |
 | [docs/journeys.md](docs/journeys.md) | Service and journey objective review. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured in-memory analyzer timing and allocation evidence. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Verified source SHA and final measured GitHub Actions check snapshot. |
+| [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/drill.html](docs/reports/drill.html) | Escaped network-inert rendering of the measured synthetic drill. |
 | [docs/reports/drill.json](docs/reports/drill.json) | Actual synthetic Windows fault/recovery measurement and correlated evidence counts. |
 | [docs/reports/journeys-2026-11-09.md](docs/reports/journeys-2026-11-09.md) | Journey objective workflow validation — 2026-11-09. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed source-bound Word guide with dated validation observations and practical limits. |
+| [docs/reports/publications.json](docs/reports/publications.json) | Exact publication hashes, reviewed page identities and source/evidence baselines. |
 | [docs/reports/stack.json](docs/reports/stack.json) | Actual Windows native Prometheus scrape/rule/missing-worker measurements. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Measured validation and review record. |
 | [docs/research.md](docs/research.md) | Primary sources and implementation rationale. |
@@ -138,3 +142,9 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [tsconfig.json](tsconfig.json) | Strict TypeScript compiler and explicit Node type configuration. |
 
 <!-- END FILE GUIDE -->
+
+## Documentation editions
+
+Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx).
+
+[Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
