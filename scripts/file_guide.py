@@ -4,22 +4,22 @@
 # variable: BEGIN — line 33
 # variable: END — line 33
 # variable: SPECIAL — line 34
-# definition: description — line 56
-# parameter: path — line 56
-# variable: content — line 66
-# variable: line — line 74
-# definition: main — line 82
-# variable: parser — line 84
-# variable: args — line 86
-# variable: files — line 87
-# variable: rows — line 95
-# variable: path — line 96
-# variable: label — line 97
-# variable: destination — line 99
-# variable: original — line 100
-# variable: first — line 101
-# variable: last — line 101
-# variable: expected — line 102
+# definition: description — line 58
+# parameter: path — line 58
+# variable: content — line 68
+# variable: line — line 76
+# definition: main — line 84
+# variable: parser — line 86
+# variable: args — line 88
+# variable: files — line 89
+# variable: rows — line 97
+# variable: path — line 98
+# variable: label — line 99
+# variable: destination — line 101
+# variable: original — line 102
+# variable: first — line 103
+# variable: last — line 103
+# variable: expected — line 104
 # END CODE MAP
 
 from __future__ import annotations
@@ -32,6 +32,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "docs/reports/project-guide.docx": "Reviewed source-bound Word guide with dated validation observations and practical limits.",
+    "docs/reports/publications.json": "Exact publication hashes, reviewed page identities and source/evidence baselines.",
     ".gitattributes": "Portable LF handling for authored text.",
     ".gitignore": "Excludes local evidence, accounts, binaries, caches and generated build output.",
     "LICENSE": "MIT license for authored source, not third-party vendor code.",
