@@ -1,72 +1,73 @@
 """Exercise the same real frozen Tk controls/core on an explicit synthetic profile; no arbitrary scripts. Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: capture — line 92
-# parameter: target — line 92
-# parameter: window — line 92
-# variable: load — line 98
-# variable: gdi — line 99
-# variable: user — line 99
-# variable: pointer — line 100
-# variable: arguments — line 101
-# variable: library — line 101
-# variable: name — line 101
-# variable: result — line 101
-# variable: function — line 127
-# variable: handle — line 130
-# variable: rectangle — line 131
-# variable: height — line 134
-# variable: width — line 134
-# variable: source — line 137
-# variable: destination — line 138
-# variable: bitmap — line 139
-# variable: previous — line 140
-# variable: pixels — line 145
-# variable: header — line 146
-# variable: raw — line 164
-# variable: scanlines — line 165
-# variable: row — line 166
-# variable: column — line 168
-# variable: offset — line 169
-# definition: chunk — line 172
-# parameter: data — line 172
-# parameter: name — line 172
-# definition: exercise — line 194
-# parameter: output — line 194
-# parameter: reopen — line 194
-# parameter: window — line 194
-# variable: deadline — line 197
-# variable: receipt — line 198
-# definition: finish — line 218
-# parameter: error — line 218
-# variable: data — line 225
-# variable: name — line 225
-# variable: row — line 227
-# definition: checked — line 234
-# parameter: callback — line 234
-# definition: wait — line 243
-# parameter: callback — line 243
-# definition: drilled — line 253
-# variable: files — line 255
-# variable: evidence — line 256
-# variable: report — line 256
-# definition: assessed — line 279
-# variable: report — line 281
-# definition: journeys — line 298
-# variable: report — line 300
-# variable: row — line 304
-# definition: compared — line 319
-# variable: report — line 321
-# variable: row — line 322
-# variable: parent — line 330
-# variable: exported — line 334
-# variable: path — line 336
-# definition: rejected — line 343
-# definition: layout — line 352
-# variable: original — line 354
-# variable: button — line 377
-# variable: name — line 377
-# variable: button — line 387
-# definition: begin — line 405
+# definition: capture — line 93
+# parameter: target — line 93
+# parameter: window — line 93
+# variable: load — line 99
+# variable: gdi — line 100
+# variable: user — line 100
+# variable: pointer — line 101
+# variable: arguments — line 102
+# variable: library — line 102
+# variable: name — line 102
+# variable: result — line 102
+# variable: function — line 128
+# variable: handle — line 132
+# variable: rectangle — line 133
+# variable: height — line 136
+# variable: width — line 136
+# variable: source — line 139
+# variable: destination — line 140
+# variable: bitmap — line 141
+# variable: previous — line 142
+# variable: pixels — line 147
+# variable: header — line 148
+# variable: raw — line 166
+# variable: scanlines — line 167
+# variable: row — line 168
+# variable: column — line 170
+# variable: offset — line 171
+# definition: chunk — line 174
+# parameter: data — line 174
+# parameter: name — line 174
+# definition: exercise — line 196
+# parameter: output — line 196
+# parameter: reopen — line 196
+# parameter: window — line 196
+# variable: deadline — line 199
+# variable: receipt — line 200
+# definition: finish — line 220
+# parameter: error — line 220
+# variable: data — line 227
+# variable: name — line 227
+# variable: row — line 229
+# definition: checked — line 236
+# parameter: callback — line 236
+# definition: wait — line 245
+# parameter: callback — line 245
+# definition: drilled — line 255
+# variable: files — line 257
+# variable: evidence — line 258
+# variable: report — line 258
+# definition: assessed — line 281
+# variable: report — line 283
+# definition: journeys — line 300
+# variable: report — line 302
+# variable: row — line 306
+# variable: detail — line 316
+# definition: compared — line 327
+# variable: report — line 329
+# variable: row — line 330
+# variable: parent — line 338
+# variable: exported — line 342
+# variable: path — line 344
+# definition: rejected — line 351
+# definition: layout — line 360
+# variable: original — line 362
+# variable: button — line 385
+# variable: name — line 385
+# variable: button — line 395
+# definition: begin — line 413
 # END CODE MAP
 
 from __future__ import annotations
@@ -126,7 +127,8 @@ def capture(window: Workbench, target: Path) -> None:
     ]:
         function = getattr(library, name)
         function.argtypes, function.restype = arguments, result
-    window.root.update_idletasks()
+    # Flush this owned native window's pending control messages before reading its pixels.
+    window.root.update()
     handle = user.GetAncestor(window.root.winfo_id(), 2)
     rectangle = wintypes.RECT()
     if not user.GetWindowRect(handle, ctypes.byref(rectangle)):
@@ -308,6 +310,12 @@ def exercise(window: Workbench, output: Path, reopen: bool) -> None:
         window.render()
         window.table.selection_set("0")
         window.inspect()
+        window.root.update()
+        assert window.view.get() == "Owner review queue"
+        assert len(window.visible) == 2
+        detail = json.loads(window.details.get("1.0", "end"))
+        assert detail["owner"] == "Payments reliability"
+        assert detail["reasons"] == ["objective_loosened"]
         capture(window, output / "journey-owner-review.png")
         receipt["steps"].append("real-independent-journey-owner-review")
         window.prepared.set(project.SCENARIOS[3])
