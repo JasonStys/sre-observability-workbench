@@ -5,6 +5,10 @@
 
 A runnable, synthetic reliability lab: drive actual HTTP requests through two services, connect Prometheus metrics to OpenTelemetry traces and structured logs, inject finite failures, and calculate evidence-aware SLOs. Created by **[Jason Stys](https://github.com/JasonStys)** · [Professional contact](https://www.linkedin.com/in/jason-stys-31b30b351/).
 
+## Native graphical application
+
+A genuine one-file Windows workbench now exposes the existing analysis core through supported file selectors, relevant settings, literal findings/detail, durable private history and exact bundle exports. Prepared scenarios are optional inputs within this same application. End users need no Python/Node installation. See [native workflows, profile safety and package acceptance](docs/native-application.md); public download/desktop installation remains a separate reviewed step.
+
 ## What it demonstrates
 
 - **Distributed observability:** TypeScript client → Python gateway → Python worker, real OpenTelemetry SDK spans with verified parent chains, bounded metric labels, and privacy-allowlisted logs.
@@ -87,12 +91,16 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [docs/architecture.md](docs/architecture.md) | Architecture and ADR-001: a bounded native observability lab. |
 | [docs/handbook.md](docs/handbook.md) | SRE Observability Workbench handbook. |
 | [docs/journeys.md](docs/journeys.md) | Service and journey objective review. |
+| [docs/licenses/tcl-9.0.4.txt](docs/licenses/tcl-9.0.4.txt) | Verbatim reference SDK Tcl9.0.4 license; builds independently collect actual embedded runtime notices. |
+| [docs/licenses/tk-9.0.4.txt](docs/licenses/tk-9.0.4.txt) | Verbatim reference SDK Tk9.0.4 license; builds independently collect actual embedded runtime notices. |
+| [docs/native-application.md](docs/native-application.md) | SRE Observability Workbench native application. |
 | [docs/reports/benchmark.json](docs/reports/benchmark.json) | Measured in-memory analyzer timing and allocation evidence. |
 | [docs/reports/ci.json](docs/reports/ci.json) | Verified source SHA and final measured GitHub Actions check snapshot. |
 | [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/drill.html](docs/reports/drill.html) | Escaped network-inert rendering of the measured synthetic drill. |
 | [docs/reports/drill.json](docs/reports/drill.json) | Actual synthetic Windows fault/recovery measurement and correlated evidence counts. |
 | [docs/reports/journeys-2026-11-09.md](docs/reports/journeys-2026-11-09.md) | Journey objective workflow validation — 2026-11-09. |
+| [docs/reports/native-application-2026-11-10.md](docs/reports/native-application-2026-11-10.md) | Native application validation — 2026-11-10. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
 | [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed source-bound Word guide with dated validation observations and practical limits. |
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact publication hashes, reviewed page identities and source/evidence baselines. |
@@ -102,6 +110,9 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [docs/runbook.md](docs/runbook.md) | Local operations and incident runbook. |
 | [docs/slo.md](docs/slo.md) | Evidence, SLI and alert contracts. |
 | [docs/testing.md](docs/testing.md) | Risk-based validation strategy. |
+| [examples/desktop/bundle.json](examples/desktop/bundle.json) | Fictional bundle plan/scenario; not cloud state, credentials or current AWS pricing. |
+| [examples/desktop/checkout.jsonl](examples/desktop/checkout.jsonl) | Fictional checkout plan/scenario; not cloud state, credentials or current AWS pricing. |
+| [examples/desktop/warehouse.jsonl](examples/desktop/warehouse.jsonl) | Fictional warehouse plan/scenario; not cloud state, credentials or current AWS pricing. |
 | [ops/grafana/dashboard.json](ops/grafana/dashboard.json) | Seven read-only SRE panels with attribution, missing-data caveats and fixed PromQL. |
 | [ops/grafana/provisioning/dashboards/default.yml](ops/grafana/provisioning/dashboards/default.yml) | Versioned read-only dashboard provisioning. Created by Jason Stys. |
 | [ops/grafana/provisioning/datasources/default.yml](ops/grafana/provisioning/datasources/default.yml) | Local native Prometheus datasource; no external SaaS or stored credentials. Created by Jason Stys. |
@@ -114,28 +125,42 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [pyproject.toml](pyproject.toml) | Strict Python lint, type, test and coverage configuration. |
 | [requirements-dev.in](requirements-dev.in) | Direct validation dependencies plus the runtime graph. |
 | [requirements-dev.lock](requirements-dev.lock) | Hash-locked portable validation dependency graph. |
+| [requirements-native.lock](requirements-native.lock) | Exact SHA256-locked native-build tools; runtime dependencies remain separately reviewed. |
 | [requirements.in](requirements.in) | Exact reviewed direct runtime dependencies. |
 | [requirements.lock](requirements.lock) | Hash-locked portable runtime dependency graph. |
 | [scripts/benchmark.py](scripts/benchmark.py) | Measure bounded SLO analysis, not service capacity or asymptotic proof. Created by Jason Stys. |
 | [scripts/bootstrap.py](scripts/bootstrap.py) | Install hash-verified official native tools; extract only one fixed regular binary. Jason Stys. |
+| [scripts/build\_native.py](scripts/build_native.py) | Build the complete real offline workbench as one Windows portable executable. Jason Stys. |
 | [scripts/code\_map.py](scripts/code_map.py) | Generate/check exact Python, SQL, shell and YAML symbol positions. Created by Jason Stys. |
 | [scripts/drill.py](scripts/drill.py) | Run real Python/TypeScript traffic and verify metric/log/span correlation. Created by Jason Stys. |
 | [scripts/file\_guide.py](scripts/file_guide.py) | Maintain exhaustive tracked-file README summaries without reading ignored drill outputs. Jason Stys. |
 | [scripts/journey\_demo.py](scripts/journey_demo.py) | Create a finite fictional retail checkout/warehouse journey bundle. Created by Jason Stys. |
+| [scripts/native\_acceptance.py](scripts/native_acceptance.py) | Exercise the same real frozen Tk controls/core on an explicit synthetic profile; no arbitrary scripts. Jason Stys. |
+| [scripts/native\_entry.py](scripts/native_entry.py) | Launch the actual bundled offline project workbench; no setup shell commands. Jason Stys. |
 | [scripts/observability.py](scripts/observability.py) | Validate real Prometheus scraping and an optional disposable CI-only Grafana dashboard. Jason Stys. |
+| [scripts/test\_native\_app.py](scripts/test_native_app.py) | Run the real frozen workbench twice with an owned synthetic profile and exact bundle persistence. Jason Stys. |
 | [scripts/ts\_map.mjs](scripts/ts_map.mjs) | Generate/check exact TypeScript and JavaScript AST symbol headers. Created by Jason Stys. |
 | [scripts/validate.sh](scripts/validate.sh) | Cross-platform quality, real integration and metadata gates. Created by Jason Stys. |
 | [scripts/validate\_repo.py](scripts/validate_repo.py) | Fail on unsafe telemetry/configuration metadata or undocumented dashboard drift. Created by Jason Stys. |
 | [sre/\_\_init\_\_.py](sre/__init__.py) | Local synthetic SRE workbench. Created by Jason Stys; https://github.com/JasonStys. |
 | [sre/\_\_main\_\_.py](sre/__main__.py) | Local-only service and evidence-assessment command line. Created by Jason Stys. |
 | [sre/bundle.py](sre/bundle.py) | Independent service/journey objectives and same-evidence policy review. Created by Jason Stys. |
+| [sre/desktop.py](sre/desktop.py) | Native offline workbench: real project inputs, analysis, searchable evidence, history and export. Jason Stys. |
+| [sre/desktop\_drill.py](sre/desktop_drill.py) | Finite native-client traffic through the existing owned instrumented services, never arbitrary targets. Jason Stys. |
+| [sre/desktop\_io.py](sre/desktop_io.py) | Bounded regular descriptor reads and strict finite JSON for owner-local desktop state. Jason Stys. |
+| [sre/desktop\_project.py](sre/desktop_project.py) | Real native SLO, objective-review and owned-service workflows with literal evidence views. Jason Stys. |
+| [sre/desktop\_state.py](sre/desktop_state.py) | Owner-local desktop profile, bounded durable bundles and non-overwriting export. Jason Stys. |
 | [sre/report.py](sre/report.py) | Publish inert escaped HTML, JSON and parameterized SQLite evidence. Created by Jason Stys. |
 | [sre/service.py](sre/service.py) | Two loopback-only instrumented services with controlled startup faults. Created by Jason Stys. |
 | [sre/slo.py](sre/slo.py) | Validate client evidence and calculate exact request-based SLOs. Created by Jason Stys. |
 | [sre/telemetry.py](sre/telemetry.py) | Allowlisted local OpenTelemetry spans, correlated logs and bounded Prometheus labels. Jason Stys. |
 | [tests/test\_bundle.py](tests/test_bundle.py) | Independent service/journey comparison and operator workflow checks. Created by Jason Stys. |
 | [tests/test\_cli.py](tests/test_cli.py) | CLI parsing, shutdown and sanitized failure contract tests. Created by Jason Stys. |
+| [tests/test\_desktop\_gui.py](tests/test_desktop_gui.py) | Presentation-adapter unit tests with real core/SQLite workers; real widgets are separately frozen-tested. Jason Stys. |
+| [tests/test\_desktop\_project.py](tests/test_desktop_project.py) | Independent native SLO/journey oracles and actual owned-service failure/retention boundaries. Jason Stys. |
+| [tests/test\_desktop\_state.py](tests/test_desktop_state.py) | Independent offline desktop ownership, byte-bound, SQLite and non-overwrite regressions. Jason Stys. |
 | [tests/test\_documentation.py](tests/test_documentation.py) | Exact source-map idempotence and function-line regression tests. Created by Jason Stys. |
+| [tests/test\_reader\_races.py](tests/test_reader_races.py) | Actual opened-device and POSIX regular-to-FIFO replacement regressions for bounded readers. Jason Stys. |
 | [tests/test\_services.py](tests/test_services.py) | Real service, privacy, recovery, resource and cross-language integration tests. Created by Jason Stys. |
 | [tests/test\_slo.py](tests/test_slo.py) | Exact SLO algebra, boundary, schema and adversarial evidence tests. Created by Jason Stys. |
 | [tools.lock.json](tools.lock.json) | Official native tool SHA-256 checksums and pinned Grafana image digest. |

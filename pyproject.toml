@@ -1,6 +1,6 @@
 [project]
 name = "sre-observability-workbench"
-version = "1.0.0"
+version = "1.1.0"
 description = "Bounded local observability drills and evidence-aware SLO analysis by Jason Stys"
 requires-python = ">=3.12"
 

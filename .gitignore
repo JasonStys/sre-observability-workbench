@@ -15,3 +15,6 @@ coverage.xml
 .env*
 *.db
 *.log
+
+release/
+*.spec

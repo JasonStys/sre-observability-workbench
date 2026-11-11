@@ -50,3 +50,7 @@ The reviewed source is [`8027d600ca0f1cb0575e8a23ff0147d3376046cb`](https://gith
 ## Maintaining these editions
 
 Update the editable usage/design/test documents first. Rebuild and visually review every Word page and workbook tab before replacing an edition; verify the exact binary digests and evidence source in publications.json. Keep account data, logs with secrets, installed-app state and private test stores out of documentation. Source and release assets retain their existing security and licensing boundaries.
+
+## Native graphical application
+
+[First-use controls, supported workflows, profile/retention safety and actual portable acceptance](native-application.md) describe the new real application. [Dated observations](reports/native-application-2026-11-10.md) remain distinct from historical publications and pending release/installation.

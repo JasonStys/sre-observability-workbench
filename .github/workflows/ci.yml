@@ -12,21 +12,21 @@
 # parameter: group — line 40
 # expression: github.ref — line 40
 # parameter: jobs — line 42
-# parameter: quality — line 43
-# expression: matrix.python — line 44
-# expression: matrix.os — line 44
-# parameter: strategy — line 47
-# parameter: matrix — line 49
-# parameter: include — line 50
-# parameter: steps — line 55
-# parameter: uses — line 56
-# parameter: with — line 57
-# parameter: run — line 65
-# parameter: shell — line 68
-# parameter: if — line 71
-# variable: GITHUB_STEP_SUMMARY — line 73
-# parameter: observability — line 74
-# parameter: security — line 101
+# parameter: steps — line 47
+# parameter: uses — line 48
+# parameter: with — line 49
+# parameter: run — line 55
+# parameter: quality — line 61
+# expression: matrix.python — line 62
+# expression: matrix.os — line 62
+# parameter: strategy — line 65
+# parameter: matrix — line 67
+# parameter: include — line 68
+# parameter: if — line 84
+# parameter: shell — line 91
+# variable: GITHUB_STEP_SUMMARY — line 96
+# parameter: observability — line 97
+# parameter: security — line 124
 # END CODE MAP
 name: Validate
 on:
@@ -40,6 +40,24 @@ concurrency:
   group: validate-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  portable-windows:
+    name: Windows / actual offline GUI executable
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.14.10'
+      - name: Install exact reviewed development and native-build hashes
+        run: python -m pip install --require-hashes -r requirements-dev.lock -r requirements-native.lock
+      - run: python -m pip check
+      - run: python -m pip_audit -r requirements-native.lock --disable-pip --no-deps
+      - run: python scripts/build_native.py
+      - name: Actual Tk controls, independent core oracles, exact export, two processes and durable reopen
+        run: python scripts/test_native_app.py
   quality:
     name: Python ${{ matrix.python }} / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -62,6 +80,11 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24'
+      - name: Source GUI import runtime on disposable Linux worker
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libtk8.6
       - run: python -m pip install --require-hashes -r requirements-dev.lock
       - run: npm ci --ignore-scripts
       - name: Strict quality and real local integration

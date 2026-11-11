@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "as_of_ms": 1794225600000,
+  "streams": [
+    {
+      "service": "fictional-retail",
+      "journey": "checkout",
+      "owner": "Payments reliability",
+      "events": "checkout.jsonl",
+      "expected_events": 20,
+      "baseline_policy": {
+        "target_ppm": 999000,
+        "latency_us": 50000,
+        "window_ms": 2592000000,
+        "min_requests": 20
+      },
+      "candidate_policy": {
+        "target_ppm": 999000,
+        "latency_us": 100000,
+        "window_ms": 2592000000,
+        "min_requests": 20
+      }
+    },
+    {
+      "service": "fictional-retail",
+      "journey": "warehouse",
+      "owner": "Inventory reliability",
+      "events": "warehouse.jsonl",
+      "expected_events": 20,
+      "baseline_policy": {
+        "target_ppm": 999000,
+        "latency_us": 50000,
+        "window_ms": 2592000000,
+        "min_requests": 20
+      },
+      "candidate_policy": {
+        "target_ppm": 999000,
+        "latency_us": 100000,
+        "window_ms": 2592000000,
+        "min_requests": 20
+      }
+    }
+  ]
+}
