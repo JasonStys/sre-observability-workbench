@@ -72,6 +72,14 @@ Offline analysis accepts target parts per million and latency microseconds. Chec
 
 Every authored Python function/class has a contract; file-header symbol maps include definitions, parameters and assigned variables with exact current line numbers. TypeScript/JavaScript maps use the compiler AST; SQL/YAML/shell maps cover declared columns/configuration/variables. Generate maps **after** formatting. Stage intended files, then regenerate the exhaustive README guide. Do not commit generated raw evidence, databases, API keys, accounts or downloaded tools. See [contributing](CONTRIBUTING.md).
 
+## Native profile storage correction
+
+Version 1.1.1 rejects pre-existing linked/nonregular fixed profile and SQLite
+sidecar entries before initialization can write through an alias. Ordinary
+recovery files and existing profile schemas remain supported; no data is reset.
+See the [confirmed fixture, recovery tests and scope](docs/reports/profile-admission-2026-11-11.md).
+Earlier native releases and documentation retain their own dated evidence.
+
 ## Every tracked file
 
 <!-- BEGIN FILE GUIDE -->
@@ -103,6 +111,7 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [docs/reports/journeys-2026-11-09.md](docs/reports/journeys-2026-11-09.md) | Journey objective workflow validation — 2026-11-09. |
 | [docs/reports/native-application-2026-11-10.md](docs/reports/native-application-2026-11-10.md) | Native application validation — 2026-11-10. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
+| [docs/reports/profile-admission-2026-11-11.md](docs/reports/profile-admission-2026-11-11.md) | Fixed profile entry admission — November 11, 2026. |
 | [docs/reports/project-guide.docx](docs/reports/project-guide.docx) | Reviewed source-bound Word guide with dated validation observations and practical limits. |
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact publication hashes, reviewed page identities and source/evidence baselines. |
 | [docs/reports/stack.json](docs/reports/stack.json) | Actual Windows native Prometheus scrape/rule/missing-worker measurements. |
@@ -165,6 +174,7 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [tests/test\_desktop\_project.py](tests/test_desktop_project.py) | Independent native SLO/journey oracles and actual owned-service failure/retention boundaries. Jason Stys. |
 | [tests/test\_desktop\_state.py](tests/test_desktop_state.py) | Independent offline desktop ownership, byte-bound, SQLite and non-overwrite regressions. Jason Stys. |
 | [tests/test\_documentation.py](tests/test_documentation.py) | Exact source-map idempotence and function-line regression tests. Created by Jason Stys. |
+| [tests/test\_profile\_admission.py](tests/test_profile_admission.py) | Actual pre-existing alias refusal and ordinary SQLite recovery continuity. Jason Stys. |
 | [tests/test\_reader\_races.py](tests/test_reader_races.py) | Actual opened-device and POSIX regular-to-FIFO replacement regressions for bounded readers. Jason Stys. |
 | [tests/test\_services.py](tests/test_services.py) | Real service, privacy, recovery, resource and cross-language integration tests. Created by Jason Stys. |
 | [tests/test\_slo.py](tests/test_slo.py) | Exact SLO algebra, boundary, schema and adversarial evidence tests. Created by Jason Stys. |
