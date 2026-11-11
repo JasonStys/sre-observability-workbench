@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "repository": "sre-observability-workbench",
+  "runtimeVersion": "1.1.1",
+  "runtimeSource": "9e7f7789a0dd1d93c44dd26088de86812abc6d96",
+  "createdAt": "2026-11-11T09:49:08.856Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide-1.1.1.docx",
+  "sha256": "e4b62a569d9d5d615621586a54795277851d53c36cc108af76fcaa20486a8a5f",
+  "screenshots": [
+    {
+      "file": "fault-recovery-budget.png",
+      "sha256": "29b00d8047c043da3329c545e267ccf5ca7d739c0ae8ca9913a8b1aa01b1f011",
+      "width": 1276,
+      "height": 899,
+      "caption": "The actual installed drill recorded 40 requests, 4 bad attempts and availability and latency PAGE results. The view shows the selected objective and complete asserted evidence; this is not a healthy production-service claim."
+    },
+    {
+      "file": "journey-owner-review.png",
+      "sha256": "7204c36edf195e777a65c22c8778dcac0d29902da961f39da65a00d52c530ef0",
+      "width": 1276,
+      "height": 899,
+      "caption": "The installed app compares separately scoped service and journey objectives. Owner review items retain their own observation quality and denominator rather than being hidden in a pooled total."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "sre/desktop_state.py",
+      "first": 213,
+      "last": 225,
+      "sha256": "0d56b4eb2129ba1b9e3b9bd0344c80e709f594b4d9dc99b6b32b860a3c208294",
+      "url": "https://github.com/JasonStys/sre-observability-workbench/blob/9e7f7789a0dd1d93c44dd26088de86812abc6d96/sre/desktop_state.py#L213"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Actual installed workflows",
+      "observed": "Full original domain, review and export controls passed two normal native launches; all 4 saved bundles retained exact original bytes.",
+      "result": "Passed"
+    },
+    {
+      "name": "Old-to-new profile",
+      "observed": "The actual installed 1.1.0 app created a synthetic profile; installed 1.1.1 reopened it and retained all 4 exact bundles without reset.",
+      "result": "Passed"
+    },
+    {
+      "name": "Source and distribution",
+      "observed": "Exact-main workflows and processed CodeQL passed with zero open main alerts. Five downloaded assets and installed files matched their verified SHA-256 identities.",
+      "result": "Verified"
+    },
+    {
+      "name": "PC and links",
+      "observed": "Existing links were backed up and retargeted with settings retained. Normal profiles and Docker were unchanged; default-profile shortcut activation remains separately untested.",
+      "result": "Verified"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "ooxmlSchema": "passed",
+    "pages": [
+      {
+        "page": 1,
+        "sha256": "67e647cbe5e93c22ae6f9f1f7a2fa7811cf4525e4799a80c54d301be248a89a0",
+        "approved": true,
+        "method": "Individually inspected final page content"
+      },
+      {
+        "page": 2,
+        "sha256": "ad89e91d1dc38869aa331136c24b8a1ff8e4feb4f22253c04ddc89ba1c245d8c",
+        "approved": true,
+        "method": "Exact pixel identity carries prior individual root/peer inspection of r2"
+      },
+      {
+        "page": 3,
+        "sha256": "496062d1e39f72bf08fffe470a2a8eff781b0fb1343bd7b098af71fe821f4daf",
+        "approved": true,
+        "method": "Exact pixel identity carries prior individual root/peer inspection of r2"
+      },
+      {
+        "page": 4,
+        "sha256": "62430e88858ddf62c073224ba8e9f5ff98cdf2aec40e7ad34ee8b2661b4ce08a",
+        "approved": true,
+        "method": "Exact pixel identity carries prior individual root/peer inspection of r2"
+      }
+    ],
+    "checkedUtc": "2026-11-11T10:22:48.489641+00:00",
+    "method": "All final page content individually inspected by root or named peers; only exact pixel identity carries prior individual inspection."
+  }
+}
