@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "repository": "sre-observability-workbench",
+  "runtimeVersion": "1.1.0",
+  "runtimeSource": "1fc5acffbb82c894fcb5de7d4c27de98713eaa19",
+  "createdAt": "2026-11-11T04:03:23.370Z",
+  "author": "Jason Stys",
+  "document": "windows-application-guide-1.1.0.docx",
+  "sha256": "41480213bda4b2dcf71f6a441e24041c8e9c54691389d078989936bc61c726b9",
+  "screenshots": [
+    {
+      "file": "fault-recovery-budget.png",
+      "sha256": "5b748cbe0ce2f1e7ca4bb5a17266e06ae5d05b07b9dfa57c85f4ac9deafd4118",
+      "width": 1276,
+      "height": 899,
+      "caption": "The actual installed drill recorded 40 requests,4 bad attempts and availability and latency PAGE results. The view shows the selected objective and complete asserted evidence; this is not a healthy production-service claim."
+    },
+    {
+      "file": "journey-owner-review.png",
+      "sha256": "70117e7defa98cfe3d5ecd9ca14658b15d9845332436a5c5f1aa60feec6a87fb",
+      "width": 1276,
+      "height": 899,
+      "caption": "The installed app compares separately scoped service and journey objectives. Owner review items retain their own observation quality and denominator rather than being hidden in a pooled total."
+    }
+  ],
+  "snippets": [
+    {
+      "file": "sre/desktop_project.py",
+      "first": 215,
+      "last": 239,
+      "sha256": "96135dd69bfefdca52d3b86854729af2e4a005cf7c2e2d8431a1fc3bddf81870",
+      "url": "https://github.com/JasonStys/sre-observability-workbench/blob/1fc5acffbb82c894fcb5de7d4c27de98713eaa19/sre/desktop_project.py#L215"
+    }
+  ],
+  "observedTests": [
+    {
+      "name": "Release and runtime",
+      "observed": "All 5 downloaded assets matched provider/sidecar hashes. Actual frozen CPython 3.14.10 and Tcl/Tk 9.0.4 matched their recorded runtime identities.",
+      "result": "Passed"
+    },
+    {
+      "name": "Real user workflow",
+      "observed": "Four exact saved bundles survived restart. The real drill produced 40 requests,120 SDK spans and 80 logs with 40 correlated chains; observed fault recovery and same-window objective comparisons passed.",
+      "result": "Passed"
+    },
+    {
+      "name": "Source and security",
+      "observed": "All current main workflows passed. Exact-source CodeQL analyses processed with zero open main alerts before publication.",
+      "result": "Passed"
+    },
+    {
+      "name": "Desktop delivery",
+      "observed": "New individual Desktop and Start-menu links target the installed accepted EXE. Shortcut metadata was read back; normal shortcut activation was not independently exercised.",
+      "result": "Verified"
+    }
+  ],
+  "visualReview": {
+    "approved": true,
+    "scope": "all four pages individually inspected",
+    "ooxmlSchema": "passed",
+    "pages": [
+      {
+        "file": "page-1.png",
+        "sha256": "d4430b693d6def3320626b14e56524fb5cd88d229ca6082a93a58a3364de8a7c"
+      },
+      {
+        "file": "page-2.png",
+        "sha256": "0fb4ff93becd60f09df5faec46ec8b5f628d11db31630cff76cca30c24f5c0aa"
+      },
+      {
+        "file": "page-3.png",
+        "sha256": "accf839f0d245eb9f5aaf2acb9cd4d6ac0e54a4743b6055d001a8cf574ace4c4"
+      },
+      {
+        "file": "page-4.png",
+        "sha256": "a3628c121b1663e0139beed7b8ab32e0f7b79f1a00e9ae1cf00e4f8f14d50366"
+      }
+    ],
+    "reviewedUtc": "2026-11-11T04:31:24.426179+00:00"
+  }
+}
