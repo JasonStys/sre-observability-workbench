@@ -1,52 +1,72 @@
 """Real service, privacy, recovery, resource and cross-language integration tests. Created by Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: call — line 60
-# parameter: headers — line 61
-# parameter: method — line 61
-# parameter: port — line 61
-# parameter: route — line 61
-# variable: connection — line 64
-# variable: response — line 67
-# definition: test_native_drill — line 73
-# parameter: tmp_path — line 73
-# variable: result — line 75
-# variable: connection — line 79
-# definition: test_endpoints_privacy_and_failure — line 92
-# parameter: tmp_path — line 92
-# variable: marker — line 94
-# variable: lab — line 95
-# variable: headers — line 106
-# variable: path — line 119
-# variable: spans — line 121
-# variable: line — line 123
-# variable: span — line 125
-# definition: test_boundaries_and_cleanup — line 128
-# parameter: tmp_path — line 128
-# variable: kwargs — line 130
-# variable: lab — line 137
-# variable: exporter — line 145
-# definition: test_inert_report_and_exclusive_output — line 150
-# parameter: tmp_path — line 150
-# variable: destination — line 152
-# variable: page — line 154
-# definition: test_latency_drill_and_volume — line 163
-# parameter: tmp_path — line 163
-# variable: result — line 165
-# definition: test_capacity_and_retention — line 171
-# parameter: tmp_path — line 171
-# variable: lab — line 175
-# variable: server — line 176
-# variable: _ — line 177
-# variable: _ — line 183
-# variable: exporter — line 187
-# variable: fake — line 188
+# definition: call — line 80
+# parameter: headers — line 81
+# parameter: method — line 81
+# parameter: port — line 81
+# parameter: route — line 81
+# variable: connection — line 84
+# variable: response — line 87
+# definition: test_actual_threaded_loopback_start_never_uses_reverse_dns — line 93
+# parameter: monkeypatch — line 93
+# parameter: tmp_path — line 93
+# definition: forbidden — line 96
+# parameter: _args — line 96
+# parameter: _kwargs — line 96
+# definition: actual_services — line 102
+# variable: lab — line 104
+# variable: identities — line 105
+# variable: server — line 106
+# variable: pool — line 112
+# variable: identities — line 113
+# variable: _ — line 114
+# variable: name — line 114
+# variable: _ — line 115
+# variable: port — line 115
+# variable: _ — line 116
+# variable: port — line 116
+# definition: test_native_drill — line 119
+# parameter: tmp_path — line 119
+# variable: result — line 121
+# variable: connection — line 125
+# definition: test_endpoints_privacy_and_failure — line 138
+# parameter: tmp_path — line 138
+# variable: marker — line 140
+# variable: lab — line 141
+# variable: headers — line 152
+# variable: path — line 165
+# variable: spans — line 167
+# variable: line — line 169
+# variable: span — line 171
+# definition: test_boundaries_and_cleanup — line 174
+# parameter: tmp_path — line 174
+# variable: kwargs — line 176
+# variable: lab — line 183
+# variable: exporter — line 191
+# definition: test_inert_report_and_exclusive_output — line 196
+# parameter: tmp_path — line 196
+# variable: destination — line 198
+# variable: page — line 200
+# definition: test_latency_drill_and_volume — line 209
+# parameter: tmp_path — line 209
+# variable: result — line 211
+# definition: test_capacity_and_retention — line 217
+# parameter: tmp_path — line 217
+# variable: lab — line 221
+# variable: server — line 222
+# variable: _ — line 223
+# variable: _ — line 229
+# variable: exporter — line 233
+# variable: fake — line 234
 # END CODE MAP
 
 from __future__ import annotations
 
 import http.client
 import json
+import socket
 import sqlite3
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pytest
@@ -68,6 +88,32 @@ def call(
         return response.status, response.read(256 * 1024)
     finally:
         connection.close()
+
+
+def test_actual_threaded_loopback_start_never_uses_reverse_dns(tmp_path, monkeypatch):
+    """Real numeric-loopback services must start/respond/close from a worker even with DNS forbidden."""
+
+    def forbidden(*_args, **_kwargs):
+        """Any reverse-lookup attempt is a failed contract, not a successful resolver fallback."""
+        raise AssertionError("A numeric owned listener must not request reverse DNS")
+
+    monkeypatch.setattr(socket, "getfqdn", forbidden)
+
+    def actual_services():
+        """Run the same real servers and request path as the native worker, using only owned ephemeral ports."""
+        with Lab(tmp_path / "threaded-services") as lab:
+            identities = [
+                (server.server_name, server.server_port) for server in lab.servers
+            ]
+            assert call(lab.gateway_port, "/health")[0] == 200
+            assert call(lab.gateway_port, "/work")[0] == 200
+            return identities
+
+    with ThreadPoolExecutor(max_workers=1, thread_name_prefix="owned-no-dns") as pool:
+        identities = pool.submit(actual_services).result(timeout=5)
+    assert [name for name, _ in identities] == ["127.0.0.1", "127.0.0.1"]
+    assert len({port for _, port in identities}) == 2
+    assert all(0 < port <= 65535 for _, port in identities)
 
 
 def test_native_drill(tmp_path: Path) -> None:
