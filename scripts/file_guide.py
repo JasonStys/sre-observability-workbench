@@ -4,22 +4,22 @@
 # variable: BEGIN — line 33
 # variable: END — line 33
 # variable: SPECIAL — line 34
-# definition: description — line 65
-# parameter: path — line 65
-# variable: content — line 75
-# variable: line — line 83
-# definition: main — line 91
-# variable: parser — line 93
-# variable: args — line 95
-# variable: files — line 96
-# variable: rows — line 104
-# variable: path — line 105
-# variable: label — line 106
-# variable: destination — line 108
-# variable: original — line 109
-# variable: first — line 110
-# variable: last — line 110
-# variable: expected — line 111
+# definition: description — line 67
+# parameter: path — line 67
+# variable: content — line 77
+# variable: line — line 85
+# definition: main — line 93
+# variable: parser — line 95
+# variable: args — line 97
+# variable: files — line 98
+# variable: rows — line 106
+# variable: path — line 107
+# variable: label — line 108
+# variable: destination — line 110
+# variable: original — line 111
+# variable: first — line 112
+# variable: last — line 112
+# variable: expected — line 113
 # END CODE MAP
 
 from __future__ import annotations
@@ -32,6 +32,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "docs/reports/windows-application-guide-1.1.1.docx": "Reviewed current 1.1.1 installed-app guide: actual screenshots, workflow, immutable code and measured limits.",
+    "docs/reports/windows-application-guide-1.1.1.json": "Current Word, screenshot, source and individually reviewed rendered-page hashes.",
     "docs/reports/windows-application-guide-1.1.0.docx": "Individually reviewed four-page installed application guide with actual screenshots, worked workflow, immutable source excerpts and limits.",
     "docs/reports/windows-application-guide-1.1.0.json": "Exact Word, actual screenshot and reviewed page digests plus observed source-specific validation results.",
     "docs/screenshots/installed-1.1.0/fault-recovery-budget.png": "Actual installed application synthetic-profile screenshot: Measured fault and recovery budget.",
