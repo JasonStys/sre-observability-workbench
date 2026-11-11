@@ -89,7 +89,7 @@ from .slo import MAX_BYTES, MAX_EVENTS, Policy, assess, integer, parse_events
 
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[1]))
 PRODUCT, PROFILE = "sre-observability-workbench", "SreObservabilityWorkbench"
-TITLE, VERSION = "SRE Observability Workbench", "1.1.0"
+TITLE, VERSION = "SRE Observability Workbench", "1.1.1"
 COLUMNS = ("Service / journey", "Signal / attempt", "Evidence", "State / result")
 RESOURCES = (
     "ops/schema.sql",
