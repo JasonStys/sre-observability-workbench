@@ -20,3 +20,7 @@ Python warnings are errors to surface leaked resources. Integration starts real 
 Performance is measured, not constrained by a flaky hardware-specific millisecond gate. The benchmark checks correctness on 10,000 attempts and reports median of five wall-clock samples plus Python-allocated memory peak. SLO latency assertions use controlled synthetic values/threshold boundaries; real timing differs by runner.
 
 Scope gaps: production workloads, long-duration endurance, massive DDoS, external alert delivery/inhibition, macOS native Prometheus binaries, public/TLS/tenancy/auth for demo Python listeners, trace UI backend and independent penetration/compliance assessment. Vendor container images are pinned and runtime-constrained; dependency scans cover authored Python/npm graphs, not a certification that every OS package inside Grafana is vulnerability-free.
+
+## Actual native application
+
+New state/controller tests retain real SQLite and core execution, with OS presentation alone adapted for unit tests. Independent domain oracles cover normal and mistaken workflows. A separate Windows job builds the actual Python3.14.10/Tk portable EXE and drives real widgets/mainloop, exact export and process restart with marked synthetic profiles. Existing coverage/security/tool gates are retained; no artifact/cache uploads were added. [Native evidence](reports/native-application-2026-11-10.md) distinguishes measured local results from pending hosted checks, signing and real-user migration.

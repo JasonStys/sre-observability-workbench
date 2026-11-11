@@ -1,95 +1,97 @@
 """Two loopback-only instrumented services with controlled startup faults. Created by Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: Faults — line 114
-# variable: every — line 117
-# variable: until — line 118
-# variable: delay_ms — line 119
-# definition: __post_init__ — line 121
-# parameter: self — line 121
-# definition: Server — line 128
-# variable: daemon_threads — line 131
-# variable: block_on_close — line 132
-# variable: request_queue_size — line 133
-# variable: allow_reuse_address — line 135
-# definition: __init__ — line 137
-# parameter: faults — line 138
-# parameter: port — line 138
-# parameter: self — line 138
-# parameter: telemetry — line 138
-# parameter: upstream — line 138
-# definition: process_request — line 152
-# parameter: client_address — line 153
-# parameter: request — line 153
-# parameter: self — line 153
-# definition: process_request_thread — line 165
-# parameter: client_address — line 166
-# parameter: request — line 166
-# parameter: self — line 166
-# definition: next_status — line 174
-# parameter: self — line 174
-# variable: fail — line 178
-# definition: Handler — line 187
-# variable: server — line 190
-# definition: setup — line 192
-# parameter: self — line 192
-# definition: log_message — line 197
-# parameter: args — line 197
-# parameter: format — line 197
-# parameter: self — line 197
-# definition: send_error — line 200
-# parameter: code — line 201
-# parameter: explain — line 201
-# parameter: message — line 201
+# definition: Faults — line 117
+# variable: every — line 120
+# variable: until — line 121
+# variable: delay_ms — line 122
+# definition: __post_init__ — line 124
+# parameter: self — line 124
+# definition: Server — line 131
+# variable: daemon_threads — line 134
+# variable: block_on_close — line 135
+# variable: request_queue_size — line 136
+# variable: allow_reuse_address — line 138
+# definition: __init__ — line 140
+# parameter: faults — line 141
+# parameter: port — line 141
+# parameter: self — line 141
+# parameter: telemetry — line 141
+# parameter: upstream — line 141
+# definition: server_bind — line 155
+# parameter: self — line 155
+# definition: process_request — line 161
+# parameter: client_address — line 162
+# parameter: request — line 162
+# parameter: self — line 162
+# definition: process_request_thread — line 174
+# parameter: client_address — line 175
+# parameter: request — line 175
+# parameter: self — line 175
+# definition: next_status — line 183
+# parameter: self — line 183
+# variable: fail — line 187
+# definition: Handler — line 196
+# variable: server — line 199
+# definition: setup — line 201
 # parameter: self — line 201
-# definition: reply — line 206
-# parameter: body — line 207
-# parameter: content_type — line 207
-# parameter: self — line 207
-# parameter: status — line 207
-# definition: do_GET — line 224
-# parameter: self — line 224
-# definition: work — line 252
-# parameter: self — line 252
-# variable: telemetry — line 254
-# variable: span — line 261
-# variable: started — line 262
-# variable: status — line 263
-# definition: forward — line 278
-# parameter: self — line 278
-# variable: span — line 285
-# variable: context — line 286
-# variable: header — line 287
-# variable: connection — line 288
-# variable: response — line 293
-# variable: body — line 294
-# variable: status — line 295
-# variable: status — line 301
-# definition: Lab — line 309
-# definition: __init__ — line 312
-# parameter: self — line 313
-# parameter: output — line 314
-# parameter: faults — line 315
-# parameter: gateway_port — line 316
-# parameter: worker_port — line 317
-# variable: worker_telemetry — line 325
-# variable: worker — line 327
-# variable: gateway_telemetry — line 329
-# variable: gateway — line 331
-# definition: gateway_port — line 340
-# parameter: self — line 340
-# definition: __enter__ — line 344
-# parameter: self — line 344
-# variable: server — line 346
-# variable: thread — line 347
-# definition: __exit__ — line 354
-# parameter: args — line 354
-# parameter: self — line 354
-# definition: close — line 358
-# parameter: self — line 358
-# variable: server — line 360
-# variable: thread — line 362
-# variable: server — line 364
-# variable: telemetry — line 366
+# definition: log_message — line 206
+# parameter: args — line 206
+# parameter: format — line 206
+# parameter: self — line 206
+# definition: send_error — line 209
+# parameter: code — line 210
+# parameter: explain — line 210
+# parameter: message — line 210
+# parameter: self — line 210
+# definition: reply — line 215
+# parameter: body — line 216
+# parameter: content_type — line 216
+# parameter: self — line 216
+# parameter: status — line 216
+# definition: do_GET — line 233
+# parameter: self — line 233
+# definition: work — line 261
+# parameter: self — line 261
+# variable: telemetry — line 263
+# variable: span — line 270
+# variable: started — line 271
+# variable: status — line 272
+# definition: forward — line 287
+# parameter: self — line 287
+# variable: span — line 294
+# variable: context — line 295
+# variable: header — line 296
+# variable: connection — line 297
+# variable: response — line 302
+# variable: body — line 303
+# variable: status — line 304
+# variable: status — line 310
+# definition: Lab — line 318
+# definition: __init__ — line 321
+# parameter: self — line 322
+# parameter: output — line 323
+# parameter: faults — line 324
+# parameter: gateway_port — line 325
+# parameter: worker_port — line 326
+# variable: worker_telemetry — line 334
+# variable: worker — line 336
+# variable: gateway_telemetry — line 338
+# variable: gateway — line 340
+# definition: gateway_port — line 349
+# parameter: self — line 349
+# definition: __enter__ — line 353
+# parameter: self — line 353
+# variable: server — line 355
+# variable: thread — line 356
+# definition: __exit__ — line 363
+# parameter: args — line 363
+# parameter: self — line 363
+# definition: close — line 367
+# parameter: self — line 367
+# variable: server — line 369
+# variable: thread — line 371
+# variable: server — line 373
+# variable: telemetry — line 375
 # END CODE MAP
 
 from __future__ import annotations
@@ -102,6 +104,7 @@ import time
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from socketserver import TCPServer
 from typing import Any
 
 from opentelemetry.trace import SpanKind, Status, StatusCode
@@ -148,6 +151,12 @@ class Server(ThreadingHTTPServer):
         self.count_lock = threading.Lock()
         self.slots = threading.BoundedSemaphore(16)
         super().__init__(("127.0.0.1", port), Handler)
+
+    def server_bind(self) -> None:
+        """Bind the fixed numeric loopback directly; reverse DNS is unnecessary and can block startup."""
+        TCPServer.server_bind(self)
+        self.server_name = "127.0.0.1"
+        self.server_port = int(self.socket.getsockname()[1])
 
     def process_request(
         self, request: socket.socket | tuple[bytes, socket.socket], client_address: Any

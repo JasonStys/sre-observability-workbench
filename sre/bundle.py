@@ -1,70 +1,71 @@
 """Independent service/journey objectives and same-evidence policy review. Created by Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: fields — line 90
-# parameter: names — line 90
-# parameter: raw — line 90
-# definition: label — line 97
-# parameter: raw — line 97
-# variable: c — line 102
-# definition: regular — line 108
-# parameter: limit — line 108
-# parameter: path — line 108
-# variable: part — line 113
-# variable: stream — line 118
-# variable: content — line 119
-# definition: analyze — line 125
-# parameter: path — line 125
+# definition: fields — line 93
+# parameter: names — line 93
+# parameter: raw — line 93
+# definition: label — line 100
+# parameter: raw — line 100
+# variable: c — line 105
+# definition: regular — line 111
+# parameter: limit — line 111
+# parameter: path — line 111
+# variable: part — line 116
+# variable: descriptor — line 121
+# variable: stream — line 124
 # variable: content — line 127
-# variable: manifest — line 128
-# variable: clock — line 133
-# variable: reports — line 139
-# variable: queue — line 140
-# variable: seen — line 141
-# variable: sources — line 142
-# variable: total_bytes — line 143
-# variable: total_events — line 143
-# variable: raw — line 144
-# variable: row — line 145
-# variable: journey — line 157
-# variable: owner — line 157
-# variable: service — line 157
-# variable: key — line 158
-# variable: identity — line 160
-# variable: filename — line 164
-# variable: source — line 174
-# variable: event_bytes — line 175
-# variable: total_bytes — line 176
-# variable: events — line 179
-# variable: total_events — line 180
-# variable: expected — line 183
-# variable: policies — line 184
-# variable: key — line 185
-# variable: settings — line 186
-# variable: baseline — line 190
-# variable: candidate — line 190
-# variable: before — line 198
-# variable: after — line 199
-# variable: loosened — line 200
-# variable: changes — line 205
-# variable: name — line 213
-# variable: reasons — line 215
-# variable: name — line 218
-# variable: name — line 222
-# variable: stream — line 227
-# parameter: item — line 256
-# parameter: item — line 258
-# definition: publish — line 264
-# parameter: output — line 264
-# parameter: result — line 264
-# variable: absolute — line 266
-# variable: part — line 269
-# variable: text — line 272
-# variable: rows — line 273
-# variable: stream — line 274
-# variable: values — line 275
-# variable: name — line 283
-# variable: value — line 288
-# variable: page — line 291
+# definition: analyze — line 133
+# parameter: path — line 133
+# variable: content — line 135
+# variable: manifest — line 136
+# variable: clock — line 141
+# variable: reports — line 147
+# variable: queue — line 148
+# variable: seen — line 149
+# variable: sources — line 150
+# variable: total_bytes — line 151
+# variable: total_events — line 151
+# variable: raw — line 152
+# variable: row — line 153
+# variable: journey — line 165
+# variable: owner — line 165
+# variable: service — line 165
+# variable: key — line 166
+# variable: identity — line 168
+# variable: filename — line 172
+# variable: source — line 182
+# variable: event_bytes — line 183
+# variable: total_bytes — line 184
+# variable: events — line 187
+# variable: total_events — line 188
+# variable: expected — line 191
+# variable: policies — line 192
+# variable: key — line 193
+# variable: settings — line 194
+# variable: baseline — line 198
+# variable: candidate — line 198
+# variable: before — line 206
+# variable: after — line 207
+# variable: loosened — line 208
+# variable: changes — line 213
+# variable: name — line 221
+# variable: reasons — line 223
+# variable: name — line 226
+# variable: name — line 230
+# variable: stream — line 235
+# parameter: item — line 264
+# parameter: item — line 266
+# definition: publish — line 272
+# parameter: output — line 272
+# parameter: result — line 272
+# variable: absolute — line 274
+# variable: part — line 277
+# variable: text — line 280
+# variable: rows — line 281
+# variable: stream — line 282
+# variable: values — line 283
+# variable: name — line 291
+# variable: value — line 296
+# variable: page — line 299
 # END CODE MAP
 
 from __future__ import annotations
@@ -72,7 +73,9 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
+import stat
 from pathlib import Path
 from typing import Any
 
@@ -115,7 +118,12 @@ def regular(path: Path, limit: int) -> bytes:
         or not path.is_file()
     ):
         raise ValueError("bundle input must be an unlinked regular file")
-    with path.open("rb") as stream:
+    descriptor = os.open(
+        path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+    )
+    with os.fdopen(descriptor, "rb") as stream:
+        if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+            raise ValueError("bundle input changed to a non-regular descriptor")
         content = stream.read(limit + 1)
     if len(content) > limit:
         raise ValueError("bundle input exceeds byte bound")

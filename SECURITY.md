@@ -19,3 +19,5 @@ Services intentionally have no user accounts or TLS and must not be exposed publ
 - Digest-pinned transient CI Grafana with generated password, no anonymous signup, disabled provider telemetry, capability restrictions and explicit loopback listener. No password or generated evidence is committed.
 
 Availability is bounded, not DDoS-proof. OS/framework request parsing still has finite standard-library limits; repeated local requests can fill limited evidence retention or consume resources. Native libraries/vendor images can have future vulnerabilities. No vulnerability suppressions or automatic destructive cleanup are used. Report counts/trace IDs are synthetic; provenance completeness is asserted, not signed.
+
+The native application uses one marked OS-owner plaintext profile, finite payload/history limits and an exclusive instance lock. Input/output authorization is an operator assertion, not identity. It does not run arbitrary commands, read real accounts, change host/cloud settings or send background data. [Native trust/retention and update boundaries](docs/native-application.md) remain explicit.

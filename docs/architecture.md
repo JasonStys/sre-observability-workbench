@@ -28,3 +28,7 @@ No arbitrary plugin code, external exporter, production fault control or dynamic
 Core assessment scans a constant number of windows in O(N), uses O(N log N) sorting for nearest-rank duration percentiles and O(N) memory. Drill correlation indexes spans/logs by trace ID for O(N) matching. SQLite's `(at_ms,status)` index supports time/status filtering without SQL interpolation. Benchmarks measure the bounded analyzer, **not** production service capacity or a mathematical complexity proof.
 
 At larger scale, revisit streaming quantiles, retention/drop indicators, request admission, authenticated trace context, secure collector transports, persistent queues, recording-rule tenancy, a trace backend, alert delivery/inhibition and production isolation. The deliberate offline exact arithmetic and PromQL extrapolation need separate contracts. Do not expand the fault/target boundary without a new threat model and authorization.
+
+## Native workbench boundary
+
+`desktop_project` adapts the unchanged actual core; `desktop` owns the Tk mainloop and one captured-settings worker; `desktop_state` owns a separate OS-local SQLite bundle store and lock. The CLI/core paths remain independent. Only completed bounded outputs are saved, and history reopens exact retained bytes. [Native operations and trust limits](native-application.md) document the actual desktop boundary rather than extending it to cloud deployment or multiuser authentication.
