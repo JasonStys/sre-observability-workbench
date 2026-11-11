@@ -99,6 +99,7 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [docs/reports/documentation-refresh-2026-11-09.md](docs/reports/documentation-refresh-2026-11-09.md) | Documentation refresh — 2026-11-09. |
 | [docs/reports/drill.html](docs/reports/drill.html) | Escaped network-inert rendering of the measured synthetic drill. |
 | [docs/reports/drill.json](docs/reports/drill.json) | Actual synthetic Windows fault/recovery measurement and correlated evidence counts. |
+| [docs/reports/installed-windows-2026-11-10.md](docs/reports/installed-windows-2026-11-10.md) | Installed Windows application validation 10 November 2026. |
 | [docs/reports/journeys-2026-11-09.md](docs/reports/journeys-2026-11-09.md) | Journey objective workflow validation — 2026-11-09. |
 | [docs/reports/native-application-2026-11-10.md](docs/reports/native-application-2026-11-10.md) | Native application validation — 2026-11-10. |
 | [docs/reports/portfolio-sync-2026-10-22.md](docs/reports/portfolio-sync-2026-10-22.md) | <!-- File: docs/reports/portfolio-sync-2026-10-22.md; Purpose: certificate-bundle security repair and evidence by Jason Stys. -->. |
@@ -106,8 +107,12 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 | [docs/reports/publications.json](docs/reports/publications.json) | Exact publication hashes, reviewed page identities and source/evidence baselines. |
 | [docs/reports/stack.json](docs/reports/stack.json) | Actual Windows native Prometheus scrape/rule/missing-worker measurements. |
 | [docs/reports/validation.md](docs/reports/validation.md) | Measured validation and review record. |
+| [docs/reports/windows-application-guide-1.1.0.docx](docs/reports/windows-application-guide-1.1.0.docx) | Individually reviewed four-page installed application guide with actual screenshots, worked workflow, immutable source excerpts and limits. |
+| [docs/reports/windows-application-guide-1.1.0.json](docs/reports/windows-application-guide-1.1.0.json) | Exact Word, actual screenshot and reviewed page digests plus observed source-specific validation results. |
 | [docs/research.md](docs/research.md) | Primary sources and implementation rationale. |
 | [docs/runbook.md](docs/runbook.md) | Local operations and incident runbook. |
+| [docs/screenshots/installed-1.1.0/fault-recovery-budget.png](docs/screenshots/installed-1.1.0/fault-recovery-budget.png) | Actual installed application synthetic-profile screenshot: Measured fault and recovery budget. |
+| [docs/screenshots/installed-1.1.0/journey-owner-review.png](docs/screenshots/installed-1.1.0/journey-owner-review.png) | Actual installed application synthetic-profile screenshot: Independent journey owner review. |
 | [docs/slo.md](docs/slo.md) | Evidence, SLI and alert contracts. |
 | [docs/testing.md](docs/testing.md) | Risk-based validation strategy. |
 | [examples/desktop/bundle.json](examples/desktop/bundle.json) | Fictional bundle plan/scenario; not cloud state, credentials or current AWS pricing. |
@@ -173,3 +178,18 @@ Every authored Python function/class has a contract; file-header symbol maps inc
 Start with the [organized handbook](docs/handbook.md) for current usage, design, security and test guidance. Reviewed downloadable editions: [project-guide.docx](docs/reports/project-guide.docx).
 
 [Publication identities and source scope](docs/reports/publications.json) · [Documentation validation record](docs/reports/documentation-refresh-2026-11-09.md). Historical results retain their own tested revision and date.
+
+## Current Windows application guide
+
+The [version 1.1.0 illustrated guide](docs/reports/windows-application-guide-1.1.0.docx) explains the actual
+installed application with two real screenshots, a worked user workflow, important
+source excerpts and observed validation. Read the [dated delivery report](docs/reports/installed-windows-2026-11-10.md)
+and [byte and page review](docs/reports/windows-application-guide-1.1.0.json) for exact scope. Historical Office
+editions remain available with their original baselines.
+
+New documentation files:
+
+- [docs/reports/windows-application-guide-1.1.0.docx](docs/reports/windows-application-guide-1.1.0.docx): Individually reviewed four-page installed application guide with actual screenshots, worked workflow, immutable source excerpts and limits.
+- [docs/reports/windows-application-guide-1.1.0.json](docs/reports/windows-application-guide-1.1.0.json): Exact Word, actual screenshot and reviewed page digests plus observed source-specific validation results.
+- [docs/screenshots/installed-1.1.0/fault-recovery-budget.png](docs/screenshots/installed-1.1.0/fault-recovery-budget.png): Actual installed application synthetic-profile screenshot: Measured fault and recovery budget.
+- [docs/screenshots/installed-1.1.0/journey-owner-review.png](docs/screenshots/installed-1.1.0/journey-owner-review.png): Actual installed application synthetic-profile screenshot: Independent journey owner review.

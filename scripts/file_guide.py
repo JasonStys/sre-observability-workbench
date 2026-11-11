@@ -4,22 +4,22 @@
 # variable: BEGIN — line 33
 # variable: END — line 33
 # variable: SPECIAL — line 34
-# definition: description — line 61
-# parameter: path — line 61
-# variable: content — line 71
-# variable: line — line 79
-# definition: main — line 87
-# variable: parser — line 89
-# variable: args — line 91
-# variable: files — line 92
-# variable: rows — line 100
-# variable: path — line 101
-# variable: label — line 102
-# variable: destination — line 104
-# variable: original — line 105
-# variable: first — line 106
-# variable: last — line 106
-# variable: expected — line 107
+# definition: description — line 65
+# parameter: path — line 65
+# variable: content — line 75
+# variable: line — line 83
+# definition: main — line 91
+# variable: parser — line 93
+# variable: args — line 95
+# variable: files — line 96
+# variable: rows — line 104
+# variable: path — line 105
+# variable: label — line 106
+# variable: destination — line 108
+# variable: original — line 109
+# variable: first — line 110
+# variable: last — line 110
+# variable: expected — line 111
 # END CODE MAP
 
 from __future__ import annotations
@@ -32,6 +32,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 BEGIN, END = "<!-- BEGIN FILE GUIDE -->", "<!-- END FILE GUIDE -->"
 SPECIAL = {
+    "docs/reports/windows-application-guide-1.1.0.docx": "Individually reviewed four-page installed application guide with actual screenshots, worked workflow, immutable source excerpts and limits.",
+    "docs/reports/windows-application-guide-1.1.0.json": "Exact Word, actual screenshot and reviewed page digests plus observed source-specific validation results.",
+    "docs/screenshots/installed-1.1.0/fault-recovery-budget.png": "Actual installed application synthetic-profile screenshot: Measured fault and recovery budget.",
+    "docs/screenshots/installed-1.1.0/journey-owner-review.png": "Actual installed application synthetic-profile screenshot: Independent journey owner review.",
     "requirements-native.lock": "Exact SHA256-locked native-build tools; runtime dependencies remain separately reviewed.",
     "docs/licenses/tcl-9.0.4.txt": "Verbatim reference SDK Tcl9.0.4 license; builds independently collect actual embedded runtime notices.",
     "docs/licenses/tk-9.0.4.txt": "Verbatim reference SDK Tk9.0.4 license; builds independently collect actual embedded runtime notices.",
