@@ -1,199 +1,215 @@
 """Presentation-adapter unit tests with real core/SQLite workers; real widgets are separately frozen-tested. Jason Stys."""
 # BEGIN CODE MAP (generated; python scripts/code_map.py)
-# definition: Variable — line 207
-# definition: __init__ — line 210
-# parameter: self — line 210
-# parameter: value — line 210
-# definition: get — line 214
-# parameter: self — line 214
-# definition: set — line 218
-# parameter: self — line 218
-# parameter: value — line 218
-# variable: callback — line 221
-# definition: trace_add — line 224
-# parameter: _event — line 224
-# parameter: callback — line 224
-# parameter: self — line 224
-# definition: Widget — line 229
-# definition: __init__ — line 232
-# parameter: _args — line 232
-# parameter: kwargs — line 232
-# parameter: self — line 232
-# parameter: _items — line 236
-# definition: pack — line 238
-# parameter: _kwargs — line 238
-# parameter: self — line 238
-# definition: grid — line 241
-# parameter: _kwargs — line 241
-# parameter: self — line 241
-# definition: grid_remove — line 244
-# parameter: self — line 244
-# definition: columnconfigure — line 247
-# parameter: _args — line 247
-# parameter: _kwargs — line 247
-# parameter: self — line 247
-# definition: add — line 250
-# parameter: _args — line 250
-# parameter: _kwargs — line 250
-# parameter: self — line 250
-# definition: theme_use — line 253
-# parameter: _args — line 253
-# parameter: self — line 253
-# definition: configure — line 256
-# parameter: _args — line 256
-# parameter: kwargs — line 256
-# parameter: self — line 256
-# definition: heading — line 260
-# parameter: _args — line 260
-# parameter: _kwargs — line 260
+# definition: Variable — line 223
+# definition: __init__ — line 226
+# parameter: self — line 226
+# parameter: value — line 226
+# definition: get — line 230
+# parameter: self — line 230
+# definition: set — line 234
+# parameter: self — line 234
+# parameter: value — line 234
+# variable: callback — line 237
+# definition: trace_add — line 240
+# parameter: _event — line 240
+# parameter: callback — line 240
+# parameter: self — line 240
+# definition: Widget — line 245
+# definition: __init__ — line 248
+# parameter: _args — line 248
+# parameter: kwargs — line 248
+# parameter: self — line 248
+# parameter: _items — line 252
+# definition: pack — line 254
+# parameter: _kwargs — line 254
+# parameter: self — line 254
+# definition: grid — line 257
+# parameter: _kwargs — line 257
+# parameter: self — line 257
+# definition: grid_remove — line 260
 # parameter: self — line 260
-# definition: column — line 263
+# definition: columnconfigure — line 263
 # parameter: _args — line 263
 # parameter: _kwargs — line 263
 # parameter: self — line 263
-# definition: bind — line 266
+# definition: add — line 266
 # parameter: _args — line 266
+# parameter: _kwargs — line 266
 # parameter: self — line 266
-# definition: yview — line 269
+# definition: theme_use — line 269
 # parameter: _args — line 269
 # parameter: self — line 269
-# definition: set — line 272
+# definition: configure — line 272
 # parameter: _args — line 272
+# parameter: kwargs — line 272
 # parameter: self — line 272
-# definition: state — line 275
-# parameter: flags — line 275
-# parameter: self — line 275
-# variable: flag — line 277
-# definition: invoke — line 283
-# parameter: self — line 283
-# definition: insert — line 289
-# parameter: _parent — line 289
-# parameter: _position — line 289
-# parameter: iid — line 289
-# parameter: self — line 289
-# parameter: values — line 289
-# definition: delete — line 293
-# parameter: items — line 293
-# parameter: self — line 293
-# variable: item — line 295
-# variable: item — line 297
-# definition: get_children — line 299
+# definition: heading — line 276
+# parameter: _args — line 276
+# parameter: _kwargs — line 276
+# parameter: self — line 276
+# definition: column — line 279
+# parameter: _args — line 279
+# parameter: _kwargs — line 279
+# parameter: self — line 279
+# definition: bind — line 282
+# parameter: _args — line 282
+# parameter: self — line 282
+# definition: yview — line 285
+# parameter: _args — line 285
+# parameter: self — line 285
+# definition: set — line 288
+# parameter: _args — line 288
+# parameter: self — line 288
+# definition: state — line 291
+# parameter: flags — line 291
+# parameter: self — line 291
+# variable: flag — line 293
+# definition: invoke — line 299
 # parameter: self — line 299
-# definition: selection — line 303
-# parameter: self — line 303
-# definition: selection_set — line 307
-# parameter: identity — line 307
-# parameter: self — line 307
-# definition: Text — line 313
-# definition: delete — line 316
-# parameter: _args — line 316
-# parameter: self — line 316
-# definition: insert — line 320
-# parameter: _position — line 320
-# parameter: self — line 320
-# parameter: text — line 320
-# definition: Root — line 325
-# definition: __init__ — line 328
-# parameter: self — line 328
-# definition: title — line 333
-# parameter: _args — line 333
-# parameter: self — line 333
-# definition: geometry — line 336
-# parameter: _args — line 336
+# definition: insert — line 305
+# parameter: _parent — line 305
+# parameter: _position — line 305
+# parameter: iid — line 305
+# parameter: self — line 305
+# parameter: values — line 305
+# definition: delete — line 309
+# parameter: items — line 309
+# parameter: self — line 309
+# variable: item — line 311
+# variable: item — line 313
+# definition: get_children — line 315
+# parameter: self — line 315
+# definition: selection — line 319
+# parameter: self — line 319
+# definition: selection_set — line 323
+# parameter: identity — line 323
+# parameter: self — line 323
+# definition: Text — line 329
+# definition: delete — line 332
+# parameter: _args — line 332
+# parameter: self — line 332
+# definition: insert — line 336
+# parameter: _position — line 336
 # parameter: self — line 336
-# definition: minsize — line 339
-# parameter: _args — line 339
-# parameter: self — line 339
-# definition: protocol — line 342
-# parameter: _event — line 342
-# parameter: callback — line 342
-# parameter: self — line 342
-# definition: after — line 346
-# parameter: _delay — line 346
-# parameter: callback — line 346
-# parameter: self — line 346
-# definition: destroy — line 350
-# parameter: self — line 350
-# definition: mainloop — line 354
-# parameter: self — line 354
-# variable: _ — line 358
-# definition: presentation — line 366
-# parameter: monkeypatch — line 366
-# parameter: _parent — line 371
-# variable: name — line 373
-# variable: messages — line 387
-# parameter: _kwargs — line 389
-# parameter: args — line 389
-# parameter: _kwargs — line 392
-# parameter: args — line 392
-# definition: app — line 398
-# parameter: presentation — line 398
-# parameter: tmp_path — line 398
-# variable: state — line 400
-# variable: root — line 401
-# variable: window — line 402
-# definition: settle — line 412
-# parameter: window — line 412
-# variable: deadline — line 414
-# definition: test_real_controller_run_filter_detail_history_export_and_help — line 421
-# parameter: app — line 422
-# parameter: monkeypatch — line 422
-# parameter: presentation — line 422
-# parameter: tmp_path — line 422
-# parameter: _kwargs — line 448
-# variable: original — line 450
-# variable: exported — line 452
-# variable: path — line 453
-# parameter: _kwargs — line 458
-# definition: test_explicit_retention_confirmation_removes_only_selected_local_copy — line 464
-# parameter: app — line 465
-# parameter: monkeypatch — line 465
-# parameter: tmp_path — line 465
-# variable: exported — line 475
-# variable: original — line 476
-# parameter: _args — line 477
-# parameter: _kwargs — line 477
-# parameter: _args — line 480
-# parameter: _kwargs — line 480
-# variable: path — line 483
-# definition: test_input_selection_cancel_busy_failure_and_literal_row_cap — line 490
-# parameter: app — line 491
-# parameter: monkeypatch — line 491
-# parameter: tmp_path — line 491
-# variable: name — line 494
-# parameter: _kwargs — line 498
-# parameter: _kwargs — line 503
-# parameter: _kwargs — line 506
-# variable: kind — line 508
-# variable: value — line 512
-# parameter: _kwargs — line 513
-# variable: index — line 529
-# definition: test_close_retains_lock_until_actual_core_transaction_finishes — line 541
-# parameter: app — line 542
-# parameter: monkeypatch — line 542
-# parameter: tmp_path — line 542
-# variable: ready — line 545
-# variable: release — line 545
-# variable: actual — line 546
-# definition: pause — line 548
-# parameter: args — line 548
-# variable: reopened — line 566
-# definition: test_main_native_close_and_rejected_acceptance_paths — line 573
-# parameter: monkeypatch — line 574
-# parameter: presentation — line 574
-# parameter: tmp_path — line 574
-# variable: actual — line 577
-# definition: create — line 579
-# parameter: root — line 579
-# parameter: state — line 579
-# variable: window — line 581
-# variable: profile — line 586
-# variable: reopened — line 588
-# variable: unknown — line 612
+# parameter: text — line 336
+# definition: Root — line 341
+# definition: __init__ — line 344
+# parameter: self — line 344
+# definition: title — line 349
+# parameter: _args — line 349
+# parameter: self — line 349
+# definition: geometry — line 352
+# parameter: _args — line 352
+# parameter: self — line 352
+# definition: minsize — line 355
+# parameter: _args — line 355
+# parameter: self — line 355
+# definition: protocol — line 358
+# parameter: _event — line 358
+# parameter: callback — line 358
+# parameter: self — line 358
+# definition: after — line 362
+# parameter: _delay — line 362
+# parameter: callback — line 362
+# parameter: self — line 362
+# definition: destroy — line 366
+# parameter: self — line 366
+# definition: mainloop — line 370
+# parameter: self — line 370
+# variable: _ — line 374
+# definition: presentation — line 382
+# parameter: monkeypatch — line 382
+# parameter: _parent — line 387
+# variable: name — line 389
+# variable: messages — line 403
+# parameter: _kwargs — line 405
+# parameter: args — line 405
+# parameter: _kwargs — line 408
+# parameter: args — line 408
+# definition: app — line 414
+# parameter: presentation — line 414
+# parameter: tmp_path — line 414
+# variable: state — line 416
+# variable: root — line 417
+# variable: window — line 418
+# definition: thread_stacks — line 428
+# variable: frames — line 430
+# variable: lines — line 431
+# variable: thread — line 432
+# variable: frame — line 433
+# variable: _ — line 435
+# variable: frame — line 445
+# definition: test_failure_diagnostics_observe_actual_blocked_thread_without_values — line 449
+# variable: entered — line 451
+# variable: release — line 451
+# definition: blocked — line 453
+# variable: private_local — line 455
+# variable: thread — line 460
+# variable: diagnostic — line 464
+# definition: settle — line 475
+# parameter: window — line 475
+# variable: deadline — line 477
+# definition: test_real_controller_run_filter_detail_history_export_and_help — line 484
+# parameter: app — line 485
+# parameter: monkeypatch — line 485
+# parameter: presentation — line 485
+# parameter: tmp_path — line 485
+# parameter: _kwargs — line 511
+# variable: original — line 513
+# variable: exported — line 515
+# variable: path — line 516
+# parameter: _kwargs — line 521
+# definition: test_explicit_retention_confirmation_removes_only_selected_local_copy — line 527
+# parameter: app — line 528
+# parameter: monkeypatch — line 528
+# parameter: tmp_path — line 528
+# variable: exported — line 538
+# variable: original — line 539
+# parameter: _args — line 540
+# parameter: _kwargs — line 540
+# parameter: _args — line 543
+# parameter: _kwargs — line 543
+# variable: path — line 546
+# definition: test_input_selection_cancel_busy_failure_and_literal_row_cap — line 553
+# parameter: app — line 554
+# parameter: monkeypatch — line 554
+# parameter: tmp_path — line 554
+# variable: name — line 557
+# parameter: _kwargs — line 561
+# parameter: _kwargs — line 566
+# parameter: _kwargs — line 569
+# variable: kind — line 571
+# variable: value — line 575
+# parameter: _kwargs — line 576
+# variable: index — line 592
+# definition: test_close_retains_lock_until_actual_core_transaction_finishes — line 604
+# parameter: app — line 605
+# parameter: monkeypatch — line 605
+# parameter: tmp_path — line 605
+# variable: ready — line 608
+# variable: release — line 608
+# variable: actual — line 609
+# definition: pause — line 611
+# parameter: args — line 611
+# variable: reopened — line 629
+# definition: test_main_native_close_and_rejected_acceptance_paths — line 636
+# parameter: monkeypatch — line 637
+# parameter: presentation — line 637
+# parameter: tmp_path — line 637
+# variable: actual — line 640
+# definition: create — line 642
+# parameter: root — line 642
+# parameter: state — line 642
+# variable: window — line 644
+# variable: profile — line 649
+# variable: reopened — line 651
+# variable: unknown — line 675
 # END CODE MAP
 
+import sys
 import threading
 import time
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -405,8 +421,55 @@ def app(tmp_path, presentation):
     finally:
         if window.worker_thread:
             window.worker_thread.join(10)
-            assert not window.worker_thread.is_alive()
+            assert not window.worker_thread.is_alive(), thread_stacks()
         state.close()
+
+
+def thread_stacks():
+    """Bound failure diagnostics to static frame identity; never include arguments, locals or evidence bytes."""
+    frames = sys._current_frames()
+    lines = []
+    for thread in threading.enumerate()[:16]:
+        frame = frames.get(thread.ident)
+        lines.append("thread=" + thread.name[:80])
+        for _ in range(24):
+            if frame is None:
+                break
+            lines.append(
+                Path(frame.f_code.co_filename).name
+                + ":"
+                + str(frame.f_lineno)
+                + ":"
+                + frame.f_code.co_name
+            )
+            frame = frame.f_back
+    return "\n".join(lines)[:8192]
+
+
+def test_failure_diagnostics_observe_actual_blocked_thread_without_values():
+    """An owned inert thread proves failure diagnostics retain its frame but not raw local data."""
+    entered, release = threading.Event(), threading.Event()
+
+    def blocked():
+        """Wait only for this test's explicit cleanup; do not acquire files, sockets or external state."""
+        private_local = "synthetic-sentinel-must-not-enter-diagnostics"
+        assert private_local
+        entered.set()
+        release.wait(2)
+
+    thread = threading.Thread(target=blocked, name="owned-diagnostic-control")
+    thread.start()
+    try:
+        assert entered.wait(1)
+        diagnostic = thread_stacks()
+        assert len(diagnostic) <= 8192
+        assert "owned-diagnostic-control" in diagnostic
+        assert "test_desktop_gui.py" in diagnostic
+        assert "synthetic-sentinel" not in diagnostic
+    finally:
+        release.set()
+        thread.join(2)
+        assert not thread.is_alive()
 
 
 def settle(window):
@@ -415,7 +478,7 @@ def settle(window):
     while window.busy and time.monotonic() < deadline:
         window.poll()
         time.sleep(0.005)
-    assert not window.busy
+    assert not window.busy, thread_stacks()
 
 
 def test_real_controller_run_filter_detail_history_export_and_help(
